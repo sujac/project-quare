@@ -1,0 +1,23 @@
+{
+    "name": "project-quare",
+    "version": "0.0.0",
+    "description": "",
+    "authors": [
+        "Isaac Royo <iroyodev@gmail.com>"
+    ],
+    "license": "MIT",
+    "main": "",
+    "keywords": [
+        "polymer",
+        "web-components"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "platform": "Polymer/platform#~0.2.3",
+        "polymer": "Polymer/polymer#~0.2.3"
+    }
+}
