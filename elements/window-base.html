@@ -1,28 +1,37 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base"  attributes="height width">
+<polymer-element name="window-base" attributes="height width">
     <template>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
-            <div class="resizer" id="resizer-left" draggable="true"></div>
+            <div class="resizer" id="resizer-left" draggable="true" on-dragStart="{{dragStart}}"></div>
             <div class="resizer" id="resizer-bottom" draggable="true"></div>
             <div class="resizer" id="resizer-right" draggable="true"></div>
         </div>
     </template>
     <script>
         Polymer('window-base', {
-            height : 400,
+            height: 400,
             width: 300,
-            ready: function() {
+            created: function () {
+                this.draggable = true;
+            },
+            ready: function () {
                 this.heightChanged();
                 this.widthChanged();
             },
-            heightChanged : function () {
+            heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
             },
-            widthChanged : function () {
+            widthChanged: function () {
                 this.$.box.style.width = this.width + 'px';
-            }
+            },
+            dragStart: function (ev) {
+                ev.dataTransfer.effectAllowed='none';
+                ev.dataTransfer.setData("Text",this.name);
+                // draginfo=this;
+                console.log("dragStart",  ev.dataTransfer.getData("Text"))
+            },
         });
     </script>
 </polymer-element>
