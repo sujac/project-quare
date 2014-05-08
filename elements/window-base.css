@@ -1,0 +1,32 @@
+:host {
+    display: inline-block;
+    position: relative;
+}
+
+#box {
+    position: relative;
+    background-color: #afafaf;
+    resize: horizontal;
+}
+
+.resizer {
+    position: absolute;
+    background-color: red;
+}
+
+#resizer-left {
+    left: 0;
+    width: 10px;
+    height: 100%;
+}
+#resizer-bottom {
+    bottom: 0;
+    height: 10px;
+    width: 100%;    
+}
+#resizer-right {
+    right: 0;
+    width: 10px;
+    height: 100%;    
+}
+
