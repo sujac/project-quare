@@ -3,17 +3,10 @@
 <polymer-element name="window-base" attributes="height width">
     <template>
         <link rel="stylesheet" href="window-base.css">
-<<<<<<< HEAD
         <div id="box">
             <div class="resizer" id="resizer-left"></div>
             <div class="resizer" id="resizer-bottom" on-track="{{trackBottom}}"></div>
             <div class="resizer" id="resizer-right" on-track="{{trackRight}}"></div>
-=======
-        <div id="box" on-mousedown={{click}}>
-            <div class="resizer" id="resizer-left"></div>
-            <div class="resizer" id="resizer-bottom"></div>
-            <div class="resizer" id="resizer-right"></div>
->>>>>>> FETCH_HEAD
         </div>
     </template>
     <script>
@@ -30,16 +23,11 @@
             widthChanged: function () {
                 this.$.box.style.width = this.width + 'px';
             },
-<<<<<<< HEAD
             trackRight: function(event, detail, sender) {
                 this.width = event.clientX;
             },
             trackBottom: function(event, detail, sender) {
                 this.height = event.clientY;
-=======
-            click: function (ev) {
-                this.height += 1;
->>>>>>> FETCH_HEAD
             }
         });
     </script>
