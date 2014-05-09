@@ -11,22 +11,30 @@
 
 .resizer {
     position: absolute;
-    background-color: red;
+    background-color: rgba(114, 114, 114, 0.5);
 }
-
-#resizer-left {
-    left: 0;
-    width: 10px;
-    height: 100%;
+#resizer-top {
+    top: -4px;
+    height: 8px;
+    width: 100%; 
+    cursor:ns-resize;
 }
 #resizer-bottom {
-    bottom: 0;
-    height: 10px;
-    width: 100%;    
+    bottom: -4px;
+    height: 8px;
+    width: 100%; 
+    cursor:ns-resize;
 }
 #resizer-right {
-    right: 0;
-    width: 10px;
-    height: 100%;    
+    right: -4px;
+    width: 8px;
+    height: 100%; 
+    cursor:ew-resize;
+}
+#resizer-left {
+    left: -4px;
+    width: 8px;
+    height: 100%;
+    cursor:ew-resize;
 }
 

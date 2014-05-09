@@ -4,7 +4,8 @@
     <template>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
-            <div class="resizer" id="resizer-left"></div>
+            <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
+            <div class="resizer" id="resizer-left" on-track="{{trackLeft}}"></div>
             <div class="resizer" id="resizer-bottom" on-track="{{trackBottom}}"></div>
             <div class="resizer" id="resizer-right" on-track="{{trackRight}}"></div>
         </div>
@@ -13,6 +14,8 @@
         Polymer('window-base', {
             height: 400,
             width: 300,
+            left: 50,
+            top: 100,
             ready: function () {
                 this.heightChanged();
                 this.widthChanged();
@@ -24,10 +27,13 @@
                 this.$.box.style.width = this.width + 'px';
             },
             trackRight: function(event, detail, sender) {
-                this.width = event.clientX;
+                this.width = event.clientX - this.left;
+            },
+            trackLeft: function(event, detail, sender) {
+                this.width = event.clientX - this.left;
             },
             trackBottom: function(event, detail, sender) {
-                this.height = event.clientY;
+                this.height = event.clientY - this.top;
             }
         });
     </script>
