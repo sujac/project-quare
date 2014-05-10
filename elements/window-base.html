@@ -32,17 +32,18 @@
                 this.$.box.style.width = this.width + 'px';
             },
             positionChanged: function () {
-                this.style["-webkit-transform"] = "translate(" + this.left + "px, "+ this.top +"px)";
+                this.style["-webkit-transform"] = "translate(" + this.left + "px, " + this.top + "px)";
             },
-            trackRight: function(event, detail, sender) {
+            trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
             },
-            trackLeft: function(event, detail, sender) {
-                this.left = event.clientX + 1; 
-                this.width = this.width - 1;
-                
+            trackLeft: function (event, detail, sender) {
+                this.width = this.width - (event.clientX - this.left);
+                this.left = event.clientX;
+
+
             },
-            trackBottom: function(event, detail, sender) {
+            trackBottom: function (event, detail, sender) {
                 this.height = event.clientY - this.top;
             }
         });
