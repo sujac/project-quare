@@ -9,6 +9,13 @@
     resize: horizontal;
 }
 
+#header {
+    display: inline-block;
+    background-color: #8b8b8b;
+    width: 100%;
+    height: 40px;
+}
+
 .resizer {
     position: absolute;
     background-color: rgba(114, 114, 114, 0.5);
