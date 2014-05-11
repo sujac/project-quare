@@ -12,15 +12,19 @@
             <div class="resizer" id="bottom-left-diagonal" on-track="{{trackBottomLeft}}"></div>
             <div class="resizer" id="top-right-diagonal" on-track="{{trackTopRight}}"></div>
             <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
-            <header id="header" on-track="{{trackDraggable}}"></header>
+            <header id="header" on-track="{{trackDraggable}}">
+                <div class="action-button" id="close" on-click="{{closeWindow}}"></div>
+            </header>
+
+            <content></content>
         </div>
     </template>
     <script>
         Polymer('window-base', {
             height: 400,
             width: 500,
-            left: 400,
-            top: 100,
+            left: 300,
+            top: 200,
             observe: {
                 left: 'positionChanged',
                 top: 'positionChanged'
@@ -78,7 +82,10 @@
             trackDraggable: function (event, detail, sender) {
                 this.top = event.clientY;
                 this.left = event.clientX;
-            }
+            },
+            closeWindow: function (event, detail, sender) {
+                this.parentNode.removeChild(this);
+            } 
         });
     </script>
 </polymer-element>
