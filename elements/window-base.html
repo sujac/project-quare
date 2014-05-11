@@ -8,8 +8,10 @@
             <div class="resizer" id="resizer-left" on-track="{{trackLeft}}"></div>
             <div class="resizer" id="resizer-bottom" on-track="{{trackBottom}}"></div>
             <div class="resizer" id="resizer-right" on-track="{{trackRight}}"></div>
-            <div class="resizer" id="right-diagonal" on-track="{{trackRightDiagonal}}"></div>
-            <div class="resizer" id="left-diagonal" on-track="{{trackLeftDiagonal}}"></div>
+            <div class="resizer" id="bottom-right-diagonal" on-track="{{trackBottomRight}}"></div>
+            <div class="resizer" id="bottom-left-diagonal" on-track="{{trackBottomLeft}}"></div>
+            <div class="resizer" id="top-right-diagonal" on-track="{{trackTopRight}}"></div>
+            <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
             <header id="header" on-track="{{trackDraggable}}"></header>
         </div>
     </template>
@@ -53,13 +55,25 @@
                 this.height = this.height - (event.clientY - this.top);
                 this.top = event.clientY;
             },
-            trackRightDiagonal: function (event, detail, sender) {
+            trackBottomRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
                 this.height = event.clientY - this.top;
             },
-            trackLeftDiagonal: function (event, detail, sender) {
-                this.width = this.width - event.clientX;
-                this.height = (this.height + this.top) - (event.clientY - this.top);
+            trackBottomLeft: function (event, detail, sender) {
+                this.height = event.clientY - this.top;
+                this.width = this.width - (event.clientX - this.left);
+                this.left = event.clientX;
+            },
+            trackTopRight: function (event, detail, sender) {
+                this.height = this.height - (event.clientY - this.top);
+                this.top = event.clientY;
+                this.width = event.clientX - this.left;
+            },
+            trackTopLeft: function (event, detail, sender) {
+                this.height = this.height - (event.clientY - this.top);
+                this.top = event.clientY;
+                this.width = this.width - (event.clientX - this.left);
+                this.left = event.clientX;
             },
             trackDraggable: function (event, detail, sender) {
                 this.top = event.clientY;
