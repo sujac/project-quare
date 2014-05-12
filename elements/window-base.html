@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base" attributes="height width">
+<polymer-element name="window-base" attributes="height width left top" class="active">
     <template>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
@@ -12,10 +12,9 @@
             <div class="resizer" id="bottom-left-diagonal" on-track="{{trackBottomLeft}}"></div>
             <div class="resizer" id="top-right-diagonal" on-track="{{trackTopRight}}"></div>
             <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
-            <header id="header" on-track="{{trackDraggable}}">
+            <header id="header" on-trackstart="{{trackStartDraggable}}" on-track="{{trackDraggable}}" on-trackend="{{trackEndDraggable}}">
                 <div class="action-button" id="close" on-click="{{closeWindow}}"></div>
             </header>
-
             <content></content>
         </div>
     </template>
@@ -23,6 +22,10 @@
         Polymer('window-base', {
             height: 400,
             width: 500,
+            minHeight: 400,
+            minWidth: 400,
+            pointerX: 0,
+            pointerY: 0,
             left: 300,
             top: 200,
             observe: {
@@ -79,13 +82,32 @@
                 this.width = this.width - (event.clientX - this.left);
                 this.left = event.clientX;
             },
+            trackStartDraggable: function (event, detail, sender) {
+                this.$.header.classList.add('dragging');
+                this.pointerY = event.clientY - this.top;
+                this.pointerX = event.clientX - this.left;
+            },
             trackDraggable: function (event, detail, sender) {
-                this.top = event.clientY;
-                this.left = event.clientX;
+                this.top = event.clientY - this.pointerY;
+                this.left = event.clientX - this.pointerX;
+            },
+            trackEndDraggable: function (event, detail, sender) {
+                this.$.header.classList.remove('dragging');
+                if (event.clientX >= window.innerWidth - 10) {
+                    this.width = window.innerWidth / 2;
+                    this.left = window.innerWidth / 2;
+                    this.height = window.innerHeight;
+                    this.top = 45; //to change
+                } else if (event.clientX <= 10) {
+                    this.width = window.innerWidth / 2;
+                    this.left = 0;
+                    this.height = window.innerHeight;
+                    this.top = 45; //to change
+                }
             },
             closeWindow: function (event, detail, sender) {
                 this.parentNode.removeChild(this);
-            } 
+            }
         });
     </script>
 </polymer-element>
