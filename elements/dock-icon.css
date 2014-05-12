@@ -1,0 +1,7 @@
+:host {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-color: red;
+    margin: 5px;
+}

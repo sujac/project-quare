@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base" attributes="height width left top" class="active">
+<polymer-element name="window-base" attributes="height width left top marginTop" class="active">
     <template>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
@@ -24,8 +24,10 @@
             width: 500,
             minHeight: 400,
             minWidth: 400,
+            zindex: 8,
             pointerX: 0,
             pointerY: 0,
+            marginTop: 0,
             left: 300,
             top: 200,
             observe: {
@@ -84,6 +86,11 @@
             },
             trackStartDraggable: function (event, detail, sender) {
                 this.$.header.classList.add('dragging');
+                if (this.classList.contains("resized")) {
+                    this.width = this.minWidth;
+                    this.height = this.minHeight;
+                    this.classList.remove("resized")
+                }
                 this.pointerY = event.clientY - this.top;
                 this.pointerX = event.clientX - this.left;
             },
@@ -93,16 +100,24 @@
             },
             trackEndDraggable: function (event, detail, sender) {
                 this.$.header.classList.remove('dragging');
-                if (event.clientX >= window.innerWidth - 10) {
-                    this.width = window.innerWidth / 2;
-                    this.left = window.innerWidth / 2;
-                    this.height = window.innerHeight;
-                    this.top = 45; //to change
+                var screenWidth = window.innerWidth;
+                var screenHeight = window.innerHeight;
+                if (event.clientX >= (screenWidth - 10)) {
+                    this.classList.add('resized');
+                    this.minWidth = this.width;
+                    this.minHeight = this.height;
+                    this.width = screenWidth / 2;
+                    this.left = screenWidth / 2;
+                    this.height = screenHeight;
+                    this.top = this.marginTop;
                 } else if (event.clientX <= 10) {
-                    this.width = window.innerWidth / 2;
+                    this.classList.add('resized');
+                    this.minWidth = this.width;
+                    this.minHeight = this.height;
+                    this.width = screenWidth / 2;
                     this.left = 0;
-                    this.height = window.innerHeight;
-                    this.top = 45; //to change
+                    this.height = screenHeight;
+                    this.top = this.marginTop;
                 }
             },
             closeWindow: function (event, detail, sender) {
