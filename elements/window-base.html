@@ -31,8 +31,6 @@
             pointerX: 0,
             pointerY: 0,
             marginTop: 25,
-            auxLeft: 0,
-            auxTop: 0,
             left: 300,
             top: 200,
             observe: {
@@ -92,11 +90,12 @@
             trackStartDraggable: function (event, detail, sender) {
                 this.$.header.classList.add('dragging');
                 if (this.classList.contains("resized")) {
+                    this.left = event.clientX - this.pointerX;
                     this.width = this.auxWidth;
                     this.height = this.auxHeight;
                     this.classList.remove("resized")
-                }else if (this.classList.contains("resized-up")) {
-                    this.left = this.auxLeft;
+                } else if (this.classList.contains("resized-up")) {
+                    this.left = event.clientX - this.pointerX;
                     this.width = this.auxWidth;
                     this.height = this.auxHeight;
                     this.classList.remove("resized-up")
@@ -112,31 +111,27 @@
                 this.$.header.classList.remove('dragging');
                 var screenWidth = window.innerWidth;
                 var screenHeight = window.innerHeight;
+                this.auxWidth = this.width;
+                this.auxHeight = this.height;
                 if (event.clientX >= (screenWidth - 10)) {
                     this.classList.add('resized');
-                    this.auxWidth = this.width;
-                    this.auxHeight = this.height;
                     this.width = screenWidth / 2;
                     this.left = screenWidth / 2;
                     this.height = screenHeight;
                     this.top = this.marginTop;
                 } else if (event.clientX <= 10) {
                     this.classList.add('resized');
-                    this.auxWidth = this.width;
-                    this.auxHeight = this.height;
                     this.width = screenWidth / 2;
                     this.left = 0;
                     this.height = screenHeight;
                     this.top = this.marginTop;
-                } else if (event.clientY <= 5 ) {
+                } else if (event.clientY <= 5) {
                     this.classList.add('resized-up');
-                    this.auxLeft = this.left;
-                    this.auxTop = this.top;
                     this.top = this.marginTop;
                     this.left = 0;
                     this.width = screenWidth;
                     this.height = screenHeight;
-                
+
                 }
             },
             closeWindow: function (event, detail, sender) {
