@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/platform/platform.js"></script>
     <link rel="import" href="elements/window-base.html">
+    <link rel="import" href="elements/window-container.html">
     <link rel="import" href="elements/dock-base.html">
     <link rel="import" href="elements/dock-icon.html">
 
@@ -17,22 +18,23 @@
 <body>
     <header id="top-header"></header>
     <dock-base>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
-        <dock-icon></dock-icon>
+        <dock-icon name="hola"></dock-icon>
+        <dock-icon name="dune"></dock-icon>
+        <dock-icon name="caca"></dock-icon>
+        <dock-icon name="mec"></dock-icon>
+        <dock-icon name="moma"></dock-icon>
+        <dock-icon name="ray"></dock-icon>
+        <dock-icon name="geg"></dock-icon>
+        <dock-icon name="vuc"></dock-icon>
+        <dock-icon name="rect"></dock-icon>
+        <dock-icon name="tot"></dock-icon>
+        <dock-icon name="haha"></dock-icon>
+        <dock-icon name="hola"></dock-icon>
     </dock-base>
-
-    <window-base left="200" top="200" marginTop="25"></window-base>
-    <window-base left="350" top="300" marginTop="25"></window-base>
+    
+    <window-container>
+        <window-base></window-base>
+    </window-container>
 </body>
 
 </html>

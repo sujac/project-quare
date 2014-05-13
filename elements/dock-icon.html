@@ -1,13 +1,17 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="window-base.html">
 
-<polymer-element name="dock-icon" attributes="">
+<polymer-element name="dock-icon" attributes="name" on-click="{{click}}">
     <template>
         <link rel="stylesheet" href="dock-icon.css">
     </template>
     <script>
         Polymer('dock-icon', {
-
+            name: "",
+            click: function (event, detail, sender) {
+                alert(this.name);
+                document.createElement("window-base");
+            }
         });
     </script>
 </polymer-element>

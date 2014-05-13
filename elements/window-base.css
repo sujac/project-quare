@@ -11,6 +11,11 @@
 .dragging {
     cursor: move;
 }
+h2 {
+    font-family: "Helvetica", sans-serif;
+    float: left;
+    margin: 5px;
+}
 #box {
     position: relative;
     background-color: #afafaf;

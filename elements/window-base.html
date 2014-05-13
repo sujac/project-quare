@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base" attributes="height width left top marginTop" class="active">
+<polymer-element name="window-base" attributes="name height width left top marginTop" class="active">
     <template>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
@@ -14,20 +14,25 @@
             <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
             <header id="header" on-trackstart="{{trackStartDraggable}}" on-track="{{trackDraggable}}" on-trackend="{{trackEndDraggable}}">
                 <div class="action-button" id="close" on-click="{{closeWindow}}"></div>
+                <h2>{{name}}</h2>
             </header>
             <content></content>
         </div>
     </template>
     <script>
         Polymer('window-base', {
+            name: "Finder",
             height: 400,
             width: 500,
+            auxHeight: 0,
+            auxWidth: 0,
             minHeight: 400,
             minWidth: 400,
-            zindex: 8,
             pointerX: 0,
             pointerY: 0,
-            marginTop: 0,
+            marginTop: 25,
+            auxLeft: 0,
+            auxTop: 0,
             left: 300,
             top: 200,
             observe: {
@@ -87,9 +92,14 @@
             trackStartDraggable: function (event, detail, sender) {
                 this.$.header.classList.add('dragging');
                 if (this.classList.contains("resized")) {
-                    this.width = this.minWidth;
-                    this.height = this.minHeight;
+                    this.width = this.auxWidth;
+                    this.height = this.auxHeight;
                     this.classList.remove("resized")
+                }else if (this.classList.contains("resized-up")) {
+                    this.left = this.auxLeft;
+                    this.width = this.auxWidth;
+                    this.height = this.auxHeight;
+                    this.classList.remove("resized-up")
                 }
                 this.pointerY = event.clientY - this.top;
                 this.pointerX = event.clientX - this.left;
@@ -104,20 +114,29 @@
                 var screenHeight = window.innerHeight;
                 if (event.clientX >= (screenWidth - 10)) {
                     this.classList.add('resized');
-                    this.minWidth = this.width;
-                    this.minHeight = this.height;
+                    this.auxWidth = this.width;
+                    this.auxHeight = this.height;
                     this.width = screenWidth / 2;
                     this.left = screenWidth / 2;
                     this.height = screenHeight;
                     this.top = this.marginTop;
                 } else if (event.clientX <= 10) {
                     this.classList.add('resized');
-                    this.minWidth = this.width;
-                    this.minHeight = this.height;
+                    this.auxWidth = this.width;
+                    this.auxHeight = this.height;
                     this.width = screenWidth / 2;
                     this.left = 0;
                     this.height = screenHeight;
                     this.top = this.marginTop;
+                } else if (event.clientY <= 5 ) {
+                    this.classList.add('resized-up');
+                    this.auxLeft = this.left;
+                    this.auxTop = this.top;
+                    this.top = this.marginTop;
+                    this.left = 0;
+                    this.width = screenWidth;
+                    this.height = screenHeight;
+                
                 }
             },
             closeWindow: function (event, detail, sender) {
