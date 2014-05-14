@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="app-window/finder-app.html">
 
 
 <polymer-element name="window-base" attributes="name height width left top marginTop" class="active">
@@ -19,13 +18,13 @@
                 <h2>{{name}}</h2>
             </header>
             <section id="app">
-            
+
             </section>
         </div>
     </template>
     <script>
         Polymer('window-base', {
-            name: "Finder",
+            name: "finder",
             height: 400,
             width: 500,
             auxHeight: 0,
@@ -45,7 +44,14 @@
                 this.heightChanged();
                 this.widthChanged();
                 this.positionChanged();
-                this.instanceApp();
+            },
+            attached: function () {
+                var importElem = document.createElement('link');
+                importElem.rel = 'import';
+                importElem.href = 'elements/app-window/' + this.name + '-app.html';
+                this.appendChild(importElem);
+                var app = document.createElement(this.name + "-app");
+                this.$.app.appendChild(app);
             },
             heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
@@ -57,10 +63,6 @@
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
-            },
-            instanceApp: function () {
-                var app=document.createElement(this.name + "-app");
-                this.$.app.appendChild(app);    
             },
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
