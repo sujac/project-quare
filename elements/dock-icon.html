@@ -9,8 +9,10 @@
         Polymer('dock-icon', {
             name: "",
             click: function (event, detail, sender) {
-                alert(this.name);
-                document.createElement("window-base");
+                var container = document.getElementsByTagName("window-container")[0];
+                var window=document.createElement("window-base");
+                window.setAttribute("name",this.name);                
+                container.appendChild(window);                
             }
         });
     </script>
