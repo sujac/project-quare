@@ -8,6 +8,9 @@
     <script>
         Polymer('dock-icon', {
             name: "",
+            ready: function() {
+                
+            },
             click: function (event, detail, sender) {
                 var container = document.getElementsByTagName("window-container")[0];
                 var window=document.createElement("window-base");

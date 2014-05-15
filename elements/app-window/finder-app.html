@@ -1,14 +1,28 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="finder-app" attributes="">
+<polymer-element name="finder-app" attributes="" on-click="{{clicked}}">
     <template>
         <link rel="stylesheet" href="finder-app.css">
         <p>soc el finder</p>
     </template>
     <script>
         Polymer('finder-app', {
+            menu: ["Finder", "File", "Edit", "View", "Window", "Help"],
             ready: function () {
-            }
+
+            },
+            attached: function () {
+                this.fire('polymer-signal', {
+                    name: "menu",
+                    data: this.menu
+                });
+            },
+//            clicked: function () {
+//                this.fire('polymer-signal', {
+//                    name: "menu",
+//                    data: this.menu
+//                });
+//            }
         });
     </script>
 </polymer-element>

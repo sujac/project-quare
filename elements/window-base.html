@@ -17,9 +17,7 @@
                 <div class="action-button" id="close" on-click="{{closeWindow}}"></div>
                 <h2>{{name}}</h2>
             </header>
-            <section id="app">
-
-            </section>
+            <content></content>
         </div>
     </template>
     <script>
@@ -46,13 +44,10 @@
                 this.positionChanged();
             },
             attached: function () {
-                var importElem = document.createElement('link');
-                importElem.rel = 'import';
-                importElem.href = 'elements/app-window/' + this.name + '-app.html';
-                this.appendChild(importElem);
-                var app = document.createElement(this.name + "-app");
-                this.$.app.appendChild(app);
-            },
+                Polymer.import( ['elements/app-window/'+this.name+'-app.html'], function() {
+                    this.onComplete();
+                }.bind(this));
+            },            
             heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
             },
@@ -63,6 +58,10 @@
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
+            },
+            onComplete: function () {
+                var app = document.createElement(this.name + "-app");
+                this.appendChild(app);
             },
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;

@@ -2,11 +2,20 @@
 
 <polymer-element name="top-bar" attributes="">
     <template>
+        <polymer-signals on-polymer-signal-menu="{{menuSignal}}"></polymer-signals>
         <link rel="stylesheet" href="top-bar.css">
+        <content></content>
     </template>
     <script>
         Polymer('top-bar', {
             ready: function () {
+            
+            },
+            menuSignal: function (e, detail, sender) {
+                this.innerHTML="";
+                for (i=0; i < detail.length; i++){
+                    this.innerHTML += detail[i];
+                }
             }
         });
     </script>
