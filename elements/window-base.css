@@ -11,6 +11,9 @@
 .dragging {
     cursor: move;
 }
+:host(.hidden:host) {
+    display: none;
+}
 h2 {
     font-family: "Helvetica", sans-serif;
     float: left;

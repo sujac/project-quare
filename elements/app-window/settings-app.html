@@ -2,19 +2,30 @@
 
 <polymer-element name="settings-app" attributes="">
     <template>
+        <polymer-signals on-polymer-signal-settings="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="settings-app.css">
         <p>jo soc els settings</p>
     </template>
     <script>
         Polymer('settings-app', {
             menu: ["Settings", "Edit", "View", "Window", "Help"],
+            options: {"top": 250, "left": 120},
             ready: function () {
-
             },
-            attached: function () {
+            domReady: function () {
+                this.menuShare();
+                this.optionsApp();
+            },
+            menuShare: function () {
                 this.fire('polymer-signal', {
                     name: "menu",
                     data: this.menu
+                });
+            },
+            optionsApp: function () {
+                this.fire('polymer-signal', {
+                    name: "settings",
+                    data: this.options
                 });
             }
         });

@@ -1,8 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 
-<polymer-element name="window-base" attributes="name height width left top marginTop" class="active">
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
     <template>
+        <polymer-signals on-polymer-signal-finder="{{options}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
@@ -44,10 +45,10 @@
                 this.positionChanged();
             },
             attached: function () {
-                Polymer.import( ['elements/app-window/'+this.name+'-app.html'], function() {
+                Polymer.import(['elements/app-window/' + this.name + '-app.html'], function () {
                     this.onComplete();
                 }.bind(this));
-            },            
+            },
             heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
             },
@@ -62,6 +63,14 @@
             onComplete: function () {
                 var app = document.createElement(this.name + "-app");
                 this.appendChild(app);
+            },
+            clicked: function () {
+                this.fire('polymer-signal', {name: this.name});
+            },
+            options: function (e, detail, sender) {
+                this.top = detail.top; 
+                this.left = detail.left; 
+                this.classList.remove("hidden");
             },
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
@@ -103,12 +112,12 @@
                     this.left = event.clientX - this.pointerX;
                     this.width = this.auxWidth;
                     this.height = this.auxHeight;
-                    this.classList.remove("resized")
+                    this.classList.remove("resized");
                 } else if (this.classList.contains("resized-up")) {
                     this.left = event.clientX - this.pointerX;
                     this.width = this.auxWidth;
                     this.height = this.auxHeight;
-                    this.classList.remove("resized-up")
+                    this.classList.remove("resized-up");
                 }
                 this.pointerY = event.clientY - this.top;
                 this.pointerX = event.clientX - this.left;
@@ -141,7 +150,6 @@
                     this.left = 0;
                     this.width = screenWidth;
                     this.height = screenHeight;
-
                 }
             },
             closeWindow: function (event, detail, sender) {
