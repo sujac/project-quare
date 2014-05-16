@@ -1,9 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 
-<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}"> <!-- afegir hidden class-->
     <template>
-        <polymer-signals on-polymer-signal-finder="{{options}}"></polymer-signals>
+        <polymer-signals on-polymer-signal-settings="{{options}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
@@ -28,8 +28,6 @@
             width: 500,
             auxHeight: 0,
             auxWidth: 0,
-            minHeight: 400,
-            minWidth: 400,
             pointerX: 0,
             pointerY: 0,
             marginTop: 25,
@@ -39,7 +37,7 @@
                 left: 'positionChanged',
                 top: 'positionChanged'
             },
-            ready: function () {
+            domReady: function () {
                 this.heightChanged();
                 this.widthChanged();
                 this.positionChanged();
