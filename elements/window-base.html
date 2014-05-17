@@ -1,9 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}">
-    <!-- afegir hidden class-->
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
     <template>
-        <polymer-signals on-polymer-signal-finder="{{options}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
@@ -39,10 +37,12 @@
             },
             /* -- Lifecycle ------------------------------------------------- */
             domReady: function () {
+                this.classList.add('active');
                 this.heightChanged();
                 this.widthChanged();
                 this.positionChanged();
             },
+            /* -- AUTOMATIC AND DYNAMIC IMPORT BASED ON ATTRIBUTE --------------------------------------------------- */
             attached: function () {
                 Polymer.import(['elements/app-window/' + this.name + '-app.html'], function () {
                     this.onComplete();
@@ -65,19 +65,18 @@
                 var app = document.createElement(this.name + "-app");
                 this.appendChild(app);
             },
-            /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
+            //HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             clicked: function () {
-                this.classList.add('active')
-                this.fire('polymer-signal', {
-                    name: this.name
-                });
+                var zIndex = parseInt(window.getComputedStyle(this).getPropertyValue('z-index'));
+                this.style.zIndex =  zIndex + 4; //needs more timeeeeeeee
+                this.fire('polymer-signal', {name: this.name}); /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
             },
-            options: function (e, detail, sender) {
-                console.log("hola");
-                this.top = detail.top;
-                this.left = detail.left;
+            options: function (object) {
+                this.top = object.top;
+                this.left = object.left;
                 this.classList.remove("hidden");
             },
+
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
             },
@@ -140,8 +139,7 @@
                 this.auxHeight = this.height;
                 if (event.clientX >= (screenWidth - 10)) {
                     this.classList.add('resized');
-                    this.width = screenWidth / 2;
-                    this.left = screenWidth / 2;
+                    this.width = this.left = screenWidth / 2;
                     this.height = screenHeight;
                     this.top = this.marginTop;
                 } else if (event.clientX <= 10) {
@@ -158,8 +156,12 @@
                     this.height = screenHeight;
                 }
             },
+            accesChild: function (child) {
+                this.options(child.getOptions());
+            },
             closeWindow: function (event, detail, sender) {
-                this.parentNode.removeChild(this);
+                this.firstChild.remove();
+                this.remove();
             }
         });
     </script>
