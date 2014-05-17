@@ -8,14 +8,14 @@
     <script>
         Polymer('dock-icon', {
             name: "",
-            ready: function() {
-                
+            ready: function () {
+
             },
             click: function (event, detail, sender) {
                 var container = document.getElementsByTagName("window-container")[0];
-                var window=document.createElement("window-base");
-                window.setAttribute("name",this.name);                
-                container.appendChild(window);                
+                var window = document.createElement("window-base");
+                window.setAttribute("name", this.name);
+                container.appendChild(window);
             }
         });
     </script>

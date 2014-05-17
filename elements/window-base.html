@@ -1,9 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-
-<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}"> <!-- afegir hidden class-->
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}">
+    <!-- afegir hidden class-->
     <template>
-        <polymer-signals on-polymer-signal-settings="{{options}}"></polymer-signals>
+        <polymer-signals on-polymer-signal-finder="{{options}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
@@ -37,6 +37,7 @@
                 left: 'positionChanged',
                 top: 'positionChanged'
             },
+            /* -- Lifecycle ------------------------------------------------- */
             domReady: function () {
                 this.heightChanged();
                 this.widthChanged();
@@ -47,6 +48,7 @@
                     this.onComplete();
                 }.bind(this));
             },
+            /* -- Changed watchers ------------------------------------------ */
             heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
             },
@@ -58,16 +60,22 @@
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
             },
+            /* -- Methods --------------------------------------------------- */
             onComplete: function () {
                 var app = document.createElement(this.name + "-app");
                 this.appendChild(app);
             },
+            /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
             clicked: function () {
-                this.fire('polymer-signal', {name: this.name});
+                this.classList.add('active')
+                this.fire('polymer-signal', {
+                    name: this.name
+                });
             },
             options: function (e, detail, sender) {
-                this.top = detail.top; 
-                this.left = detail.left; 
+                console.log("hola");
+                this.top = detail.top;
+                this.left = detail.left;
                 this.classList.remove("hidden");
             },
             trackRight: function (event, detail, sender) {
