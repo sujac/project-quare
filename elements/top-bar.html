@@ -4,7 +4,7 @@
     <template>
         <polymer-signals on-polymer-signal-menu="{{menuSignal}}"></polymer-signals>
         <link rel="stylesheet" href="top-bar.css">
-        <content></content>
+        <ul id="menu"></ul>
     </template>
     <script>
         Polymer('top-bar', {
@@ -12,9 +12,9 @@
             
             },
             menuSignal: function (e, detail, sender) {
-                this.innerHTML="";
-                for (i=0; i < detail.length; i++){
-                    this.innerHTML += detail[i];
+                this.$.menu.innerHTML="<li><b>" + detail[0] + "</b></li>";;
+                for (i=1; i < detail.length; i++){
+                    this.$.menu.innerHTML += "<li>" + detail[i] + "</li>";
                 }
             }
         });

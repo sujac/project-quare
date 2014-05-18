@@ -2,6 +2,7 @@
 
 <polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
     <template>
+        <polymer-signals on-polymer-signal-inactive="{{updateState}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
@@ -29,6 +30,7 @@
             pointerX: 0,
             pointerY: 0,
             marginTop: 25,
+            zNumber: 0,
             left: 300,
             top: 200,
             observe: {
@@ -37,10 +39,12 @@
             },
             /* -- Lifecycle ------------------------------------------------- */
             domReady: function () {
-                this.classList.add('active');
                 this.heightChanged();
                 this.widthChanged();
                 this.positionChanged();
+                this.inactive();
+                this.classList.add('active');
+
             },
             /* -- AUTOMATIC AND DYNAMIC IMPORT BASED ON ATTRIBUTE --------------------------------------------------- */
             attached: function () {
@@ -55,6 +59,9 @@
             widthChanged: function () {
                 this.$.box.style.width = this.width + 'px';
             },
+            zNumberChanged: function (oldValue, newValue) {
+                this.style.zIndex = this.zNumber;
+            },
             positionChanged: function () {
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
@@ -65,18 +72,29 @@
                 var app = document.createElement(this.name + "-app");
                 this.appendChild(app);
             },
-            //HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            inactive: function () {
+                this.fire('polymer-signal', {
+                    name: "inactive"
+                });
+            },
             clicked: function () {
-                var zIndex = parseInt(window.getComputedStyle(this).getPropertyValue('z-index'));
-                this.style.zIndex =  zIndex + 4; //needs more timeeeeeeee
-                this.fire('polymer-signal', {name: this.name}); /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
+                if (!this.classList.contains("active")) {
+                    /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
+                    this.fire('polymer-signal', { name: this.name});
+                    this.inactive();
+                    this.classList.add('active'); //add active class only to the clicked one
+                    this.zNumber = this.zNumber + 4; //needs more timeeeeeeee
+                }
             },
             options: function (object) {
                 this.top = object.top;
                 this.left = object.left;
                 this.classList.remove("hidden");
             },
-
+            updateState: function () {
+                this.zNumber = (this.zNumber - 2) <= 0 ? 0 : (this.zNumber - 2);
+                this.classList.remove('active'); //remove active class from every window-base instance
+            },
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
             },
@@ -160,7 +178,7 @@
                 this.options(child.getOptions());
             },
             closeWindow: function (event, detail, sender) {
-                this.firstChild.remove();
+                console.log(this.remove());
                 this.remove();
             }
         });
