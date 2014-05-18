@@ -4,17 +4,26 @@
     height: 25px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+    color: #fff;
 }
-
 ul {
     list-style: none;
-    margin: 0;
+    margin: 2px 0;
     padding: 0;
 }
-
 li {
     float: left;
-    margin-left: 12px;
+    margin-left: 20px;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .2);
     color: #fff;
+}
+.apple {
+    float: left;
+    margin: 2px 20px;
+    font-size: 20px;
+}
+#time {
+    float: right;
+    margin: 2px 20px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .2);
 }

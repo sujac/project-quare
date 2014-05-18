@@ -4,18 +4,43 @@
     <template>
         <polymer-signals on-polymer-signal-menu="{{menuSignal}}"></polymer-signals>
         <link rel="stylesheet" href="top-bar.css">
-        <ul id="menu"></ul>
+        <link rel="stylesheet" href="../css/icons.css">
+        <span class="apple icon-apple"></span>
+        <ul id="menu">
+            <li><b>Finder</b></li>
+            <li>File</li>
+            <li>Edit</li>
+            <li>View</li>
+            <li>Window</li>
+            <li>Help</li>
+        </ul>
+        <span id="time"></span>
     </template>
     <script>
         Polymer('top-bar', {
-            ready: function () {
-            
+            domReady: function () {
+                this.interval = setInterval(this.startTime.bind(this), 1000);
             },
             menuSignal: function (e, detail, sender) {
-                this.$.menu.innerHTML="<li><b>" + detail[0] + "</b></li>";;
-                for (i=1; i < detail.length; i++){
+                this.$.menu.innerHTML = "<li><b>" + detail[0] + "</b></li>";;
+                for (i = 1; i < detail.length; i++) {
                     this.$.menu.innerHTML += "<li>" + detail[i] + "</li>";
                 }
+            },
+            startTime: function () {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = this.checkTime(m);
+                s = this.checkTime(s);
+                this.$.time.innerHTML = h + ":" + m + ":" + s;
+            },
+            checkTime: function (i) {
+                if (i < 10) {
+                    i = "0" + i
+                }; 
+                return i;
             }
         });
     </script>

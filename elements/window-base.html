@@ -1,9 +1,11 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="stylesheet" polymer-scope="global" href="../css/fonts.css">
 
 <polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
     <template>
         <polymer-signals on-polymer-signal-inactive="{{updateState}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
+        <link rel="stylesheet" href="../css/icons.css">
         <div id="box">
             <div class="resizer" id="resizer-top" on-track="{{trackTop}}"></div>
             <div class="resizer" id="resizer-left" on-track="{{trackLeft}}"></div>
@@ -14,8 +16,9 @@
             <div class="resizer" id="top-right-diagonal" on-track="{{trackTopRight}}"></div>
             <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
             <header id="header" on-trackstart="{{trackStartDraggable}}" on-track="{{trackDraggable}}" on-trackend="{{trackEndDraggable}}">
-                <div class="action-button" id="close" on-click="{{closeWindow}}"></div>
-                <h2>{{name}}</h2>
+                <span class="control-icon icon-close" on-click="{{closeWindow}}"></span>
+                <span class="control-icon icon-minimize"></span>
+                <span class="control-icon icon-maximize" on-click="{{maxWindow}}"></span>
             </header>
             <content></content>
         </div>
@@ -80,7 +83,9 @@
             clicked: function () {
                 if (!this.classList.contains("active")) {
                     /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
-                    this.fire('polymer-signal', { name: this.name});
+                    this.fire('polymer-signal', {
+                        name: this.name
+                    });
                     this.inactive();
                     this.classList.add('active'); //add active class only to the clicked one
                     this.zNumber = this.zNumber + 4; //needs more timeeeeeeee
@@ -168,18 +173,20 @@
                     this.top = this.marginTop;
                 } else if (event.clientY <= 5) {
                     this.classList.add('resized-up');
-                    this.top = this.marginTop;
-                    this.left = 0;
-                    this.width = screenWidth;
-                    this.height = screenHeight;
+                    this.maxWindow();
                 }
             },
             accesChild: function (child) {
                 this.options(child.getOptions());
             },
             closeWindow: function (event, detail, sender) {
-                console.log(this.remove());
                 this.remove();
+            },
+            maxWindow: function () {
+                this.top = this.marginTop;
+                this.left = 0;
+                this.width = window.innerWidth;
+                this.height = window.innerHeight;
             }
         });
     </script>
