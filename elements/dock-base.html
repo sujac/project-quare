@@ -1,13 +1,23 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="options-dock.html">
 
-<polymer-element name="dock-base" attributes="" class="left-position">
+<polymer-element name="dock-base" attributes="" class="bottom-position" on-contextmenu="{{rightClicked}}">
     <template>
         <link rel="stylesheet" href="dock-base.css">
-        <content></content>
+        <content></content>        
     </template>
     <script>
         Polymer('dock-base', {
             ready: function () {
+            },
+            rightClicked: function (event, detail, sender) {
+                event.preventDefault();
+                var container = document.getElementsByTagName("window-container")[0];
+                var window = document.createElement("options-dock");
+                window.setAttribute("left", event.clientX - 125);
+                window.setAttribute("top", event.clientY - 150);
+                container.appendChild(window);
+                return false;
             }
         });
     </script>

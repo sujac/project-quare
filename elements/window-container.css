@@ -1,7 +1,13 @@
 :host {
-    background-image: url('../../img/wallpaper01.jpg');
     background-position: center;
     display: inline-block;
     width: 100%;
     height: 100%;
+}
+
+:host(.wallpaper1:host) {
+    background-image: url('../../img/wallpaper1.jpg');
+}
+:host(.wallpaper2:host) {
+    background-image: url('../../img/wallpaper2.jpg');
 }

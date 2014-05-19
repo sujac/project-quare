@@ -1,18 +1,19 @@
 :host {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
-    padding: 12px 0;
     overflow-y: hidden;
 }
 :host(.left-position:host) {
+    padding: 12px 0;
     margin: auto;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 70px;
+    width: 72px;
     height: 70%;
 }
 :host(.right-position:host) {
+    padding: 12px 0;
     margin: auto;
     top: 0;
     right: 0;
@@ -21,10 +22,18 @@
     height: 70%;
 }
 :host(.bottom-position:host) {
+    left: 0; bottom: 0; right: 0;
     margin: auto;
-    left: 0;
-    right: 0;
     bottom: 0;
-    width: 70% ;
+    width: 70%;
     height: 70px;
+}
+#optionsDock {
+    top: 0;
+    right: 0;
+    display: none;
+    position: absolute;
+    width: 250px;
+    height: 120px;
+    background-color: red;
 }

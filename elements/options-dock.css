@@ -1,0 +1,9 @@
+:host {
+    -ms-transform: translate(50px,100px); /* IE 9 */
+    -webkit-transform: translate(50px,100px); /* Chrome, Safari, Opera */
+    transform: translate(50px,100px);
+    position: absolute;
+    width: 250px;
+    height: 120px;
+    background-color: red;
+}

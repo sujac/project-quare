@@ -1,0 +1,22 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="options-dock" attributes="left top">
+    <template>
+        <link rel="stylesheet" href="options-dock.css">
+    </template>
+    <script>
+        Polymer('options-dock', {
+            left: 0,
+            top: 0,
+            observe: {
+                left: 'positionChanged',
+                top: 'positionChanged'
+            },
+            positionChanged: function () {
+                var s = this.style;
+                var translate = "translate(" + this.left + "px, " + this.top + "px)";
+                s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
+            },
+        });
+    </script>
+</polymer-element>

@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="calculator-app" attributes="">
+<polymer-element name="calculator-app" attributes="options">
     <template>
         <polymer-signals on-polymer-signal-calculator="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="calculator-app.css">
@@ -9,12 +9,19 @@
     <script>
         Polymer('calculator-app', {
             menu: ["Calculator", "File", "Edit", "View", "Window", "Help"],
-            options: {"top": 100, "left": 250},
-            ready: function () {
+            options: {
+                "top": 200,
+                "left": 450,
+                "width": 320,
+                "height": 500
             },
             domReady: function () {
                 this.menuShare();
-                this.optionsApp();
+            },
+            attached: function () {
+                this.async(function () {
+                    this.parentNode.accesChild(this);
+                });
             },
             menuShare: function () {
                 this.fire('polymer-signal', {
@@ -22,11 +29,8 @@
                     data: this.menu
                 });
             },
-            optionsApp: function () {
-                this.fire('polymer-signal', {
-                    name: "calculator",
-                    data: this.options
-                });
+            getOptions: function () {
+                return this.options;
             }
         });
     </script>

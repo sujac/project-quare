@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="stylesheet" polymer-scope="global" href="../css/fonts.css">
 
-<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden"> 
     <template>
         <polymer-signals on-polymer-signal-inactive="{{updateState}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
@@ -16,9 +16,9 @@
             <div class="resizer" id="top-right-diagonal" on-track="{{trackTopRight}}"></div>
             <div class="resizer" id="top-left-diagonal" on-track="{{trackTopLeft}}"></div>
             <header id="header" on-trackstart="{{trackStartDraggable}}" on-track="{{trackDraggable}}" on-trackend="{{trackEndDraggable}}">
-                <span class="control-icon icon-close" on-click="{{closeWindow}}"></span>
-                <span class="control-icon icon-minimize"></span>
-                <span class="control-icon icon-maximize" on-click="{{maxWindow}}"></span>
+                <span class="control-icon icon-CLOSE" on-click="{{closeWindow}}"></span>
+                <span class="control-icon icon-MINUS"></span>
+                <span class="control-icon icon-MAXIMIZE" on-click="{{maximizeWindow}}"></span>
             </header>
             <content></content>
         </div>
@@ -32,8 +32,9 @@
             auxWidth: 0,
             pointerX: 0,
             pointerY: 0,
-            marginTop: 25,
+            marginTop: 35,
             zNumber: 0,
+            maximized: false,
             left: 300,
             top: 200,
             observe: {
@@ -92,8 +93,10 @@
                 }
             },
             options: function (object) {
-                this.top = object.top;
-                this.left = object.left;
+                ("width" in object) ? this.width = object.width : "";
+                ("height" in object) ? this.height = object.height : "";
+                ("top" in object) ? this.top = object.top : "";
+                ("left" in object) ? this.left = object.left : "";
                 this.classList.remove("hidden");
             },
             updateState: function () {
@@ -138,13 +141,11 @@
                 this.$.header.classList.add('dragging');
                 if (this.classList.contains("resized")) {
                     this.left = event.clientX - this.pointerX;
-                    this.width = this.auxWidth;
-                    this.height = this.auxHeight;
+                    this.resizeWindow();
                     this.classList.remove("resized");
                 } else if (this.classList.contains("resized-up")) {
                     this.left = event.clientX - this.pointerX;
-                    this.width = this.auxWidth;
-                    this.height = this.auxHeight;
+                    this.resizeWindow();
                     this.classList.remove("resized-up");
                 }
                 this.pointerY = event.clientY - this.top;
@@ -182,11 +183,30 @@
             closeWindow: function (event, detail, sender) {
                 this.remove();
             },
+            maximizeWindow: function (event, detail, sender) {
+                if (!this.maximized){
+                    this.auxWidth = this.width;
+                    this.auxHeight = this.height;
+                    this.top = this.marginTop;
+                    this.left = 0;
+                    this.width = window.innerWidth;
+                    this.height = window.innerHeight;
+                    this.maximized = true;
+                }else{
+                    this.left = event.clientX;
+                    this.resizeWindow();
+                    this.maximized = false;
+                }
+            },
             maxWindow: function () {
                 this.top = this.marginTop;
                 this.left = 0;
                 this.width = window.innerWidth;
                 this.height = window.innerHeight;
+            },
+            resizeWindow: function () {
+                this.width = this.auxWidth;
+                this.height = this.auxHeight;            
             }
         });
     </script>

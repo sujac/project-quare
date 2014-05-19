@@ -8,6 +8,8 @@
     <script>
         Polymer('window-container', {
             ready: function () {
+                var ran = Math.floor(Math.random() * 2) + 1;
+                this.classList.add("wallpaper"+ran);
             }
         });
     </script>
