@@ -2,7 +2,11 @@
 
 <polymer-element name="options-dock" attributes="left top">
     <template>
+        <polymer-signals on-polymer-signal-positionDock="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="options-dock.css">
+        <p on-click="{{leftDock}}">Dock position: Left</p>
+        <p on-click="{{rightDock}}">Dock position: Right</p>
+        <p on-click="{{bottomDock}}">Dock position: Bottom</p>
     </template>
     <script>
         Polymer('options-dock', {
@@ -17,6 +21,28 @@
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
             },
+            leftDock: function () {
+                this.fire('polymer-signal', {
+                    name: "positionDock",
+                });
+//                this.remove();
+            },
+            rightDock: function () {
+                this.fire('polymer-signal', {
+                    name: "positionDock",
+                });
+//                this.remove();
+            },
+            bottomDock: function () {
+                this.fire('polymer-signal', {
+                    name: "positionDock",
+                });
+//                this.remove();
+            },
+            menuShare: function (e, detail, f) {
+                console.log(detail)
+                console.log("hola");
+            }
         });
     </script>
 </polymer-element>

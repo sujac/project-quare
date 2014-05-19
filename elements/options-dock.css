@@ -1,9 +1,21 @@
 :host {
-    -ms-transform: translate(50px,100px); /* IE 9 */
-    -webkit-transform: translate(50px,100px); /* Chrome, Safari, Opera */
-    transform: translate(50px,100px);
+    -ms-transform: translate(50px, 100px);
+    /* IE 9 */
+    -webkit-transform: translate(50px, 100px);
+    /* Chrome, Safari, Opera */
+    transform: translate(50px, 100px);
     position: absolute;
     width: 250px;
-    height: 120px;
-    background-color: red;
+    height: 95px;
+    background-color: rgba(234, 234, 231, 0.85);
+    border-radius: 4px;
+    border: 1px solid #7b7b7b;
+}
+p {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #2f2f2f;
+    padding: 6px 20px;
+    margin: 0;
 }

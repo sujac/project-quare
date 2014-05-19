@@ -3,21 +3,26 @@
 
 <polymer-element name="dock-base" attributes="" class="bottom-position" on-contextmenu="{{rightClicked}}">
     <template>
+        <polymer-signals on-polymer-signal-positionDock="{{updatePosition}}"></polymer-signals>
         <link rel="stylesheet" href="dock-base.css">
-        <content></content>        
+        <content></content>
     </template>
     <script>
         Polymer('dock-base', {
-            ready: function () {
-            },
+            ready: function () {},
             rightClicked: function (event, detail, sender) {
                 event.preventDefault();
                 var container = document.getElementsByTagName("window-container")[0];
-                var window = document.createElement("options-dock");
-                window.setAttribute("left", event.clientX - 125);
-                window.setAttribute("top", event.clientY - 150);
-                container.appendChild(window);
+                var modal = document.createElement("options-dock");
+                modal.setAttribute("left", event.clientX - 125);
+                modal.setAttribute("top", event.clientY - 150);
+                container.appendChild(modal);
                 return false;
+            },
+            updatePosition: function (e, detail, sender) {
+                console.log("hola?");
+                console.log(detail);
+                
             }
         });
     </script>
