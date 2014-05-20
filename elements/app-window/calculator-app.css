@@ -1,11 +1,16 @@
+:host {
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
 #result {
     width: 100%;
-    height: 28%;
-    background-color: yellow;
+    height: 30%;
 }
 .content {
     width: 100%;
-    height: 64%;
+    height: 70%;
 }
 .row {
     width: 100%;
@@ -15,9 +20,23 @@
     float: left;
     width: 25%;
     height: 100%;
-    background-color: red;
-    border: 1px solid black;
+    background-color: RGB(216, 217, 219);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;    
-    box-sizing: border-box;        
+    box-sizing: border-box;
+    color: #222;
+    font-size: 38px;
+    line-height: 38px;
+    font-weight: 200;
+    text-align: center; 
+}
+.button-number:nth-child(4n+0), #rest {
+    border-right: 0;
+    background-color: RGB(247, 142, 17);
+    color: #fff;
+}
+.half-width {
+    width: 50%;
 }

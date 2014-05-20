@@ -4,37 +4,39 @@
     <template>
         <polymer-signals on-polymer-signal-calculator="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="calculator-app.css">
-        <div id="result"></div>
+        <div id="result">
+            <p id="operations">{{operations}}</p>
+            <p id="resultat">{{result}}</p>
+        </div>
         <section class="content">
             <div class="row">
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
+                <div class="button-number" on-click="{{buttonPressed}}">C</div>
+                <div class="button-number" on-click="{{buttonPressed}}"></div>
+                <div class="button-number" on-click="{{buttonPressed}}">%</div>
+                <div class="button-number">*</div>
             </div>
             <div class="row">
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
+                <div class="button-number" on-click="{{buttonPressed}}">7</div>
+                <div class="button-number" on-click="{{buttonPressed}}">8</div>
+                <div class="button-number" on-click="{{buttonPressed}}">9</div>
+                <div class="button-number" on-click="{{buttonPressed}}">x</div>
             </div>
             <div class="row">
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
+                <div class="button-number" on-click="{{buttonPressed}}">4</div>
+                <div class="button-number" on-click="{{buttonPressed}}">5</div>
+                <div class="button-number" on-click="{{buttonPressed}}">6</div>
+                <div class="button-number" on-click="{{buttonPressed}}">-</div>
             </div>
             <div class="row">
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
+                <div class="button-number" on-click="{{buttonPressed}}">1</div>
+                <div class="button-number" on-click="{{buttonPressed}}">2</div>
+                <div class="button-number" on-click="{{buttonPressed}}">3</div>
+                <div class="button-number" on-click="{{buttonPressed}}">+</div>
             </div>
             <div class="row">
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
-                <div class="button-number"></div>
+                <div class="button-number half-width" on-click="{{buttonPressed}}">0</div>
+                <div class="button-number" on-click="{{buttonPressed}}">.</div>
+                <div class="button-number" id="rest" on-click="{{buttonPressed}}">=</div>
             </div>
         </section>
     </template>
@@ -47,6 +49,8 @@
                 "width": 320,
                 "height": 500
             },
+            operations: "",
+            result: 0,
             domReady: function () {
                 this.menuShare();
             },
@@ -63,6 +67,12 @@
             },
             getOptions: function () {
                 return this.options;
+            },
+            buttonPressed: function (event, detail, sender) {
+                (sender.id == "rest") ? this.calculate() : this.operations += event.target.textContent;
+            },
+            calculate: function () {
+                this.$.resultat.innerHTML = eval(this.$.operations.textContent);
             }
         });
     </script>

@@ -5,20 +5,22 @@
     <template>
         <polymer-signals on-polymer-signal-closed="{{updateState}}"></polymer-signals>
         <link rel="stylesheet" href="dock-icon.css">
+        <div>{{ name | toUpperCase }}</div>
     </template>
     <script>
         Polymer('dock-icon', {
             name: "",
-            open: false,
             ready: function () {
 
             },
             click: function (event, detail, sender) {
-                this.open = true;
                 var container = document.getElementsByTagName("window-container")[0];
                 var window = document.createElement("window-base");
                 window.setAttribute("name", this.name);
                 container.appendChild(window);
+            },
+            toUpperCase: function (value) {
+                return value.charAt(0).toUpperCase() + value.slice(1);
             }
         });
     </script>

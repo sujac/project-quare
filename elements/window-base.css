@@ -19,10 +19,8 @@
 :host(.hidden:host) {
     display: none;
 }
-h2 {
-    font-family: "Helvetica", sans-serif;
-    float: left;
-    margin: 5px;
+::content {
+  background-color: red;
 }
 .icon {
     display: inline-block;
@@ -98,16 +96,6 @@ h2 {
     left: -4px;
     top: -4px;
     cursor: nwse-resize;
-}
-.action-button {
-    float: left;
-}
-#close {
-    background: url('../../img/sprite.png') no-repeat 0 0;
-    background-size: 43px 19px;
-    width: 20px;
-    height: 19px;
-    margin: 8px;
 }
 .control-icon {
     color: #2a2a2a;
