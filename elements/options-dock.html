@@ -1,8 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-
-<polymer-element name="options-dock" attributes="left top">
+<link rel="import" href="polymer-signals.html">
+<polymer-element name="options-dock" attributes="left top" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
     <template>
-        <polymer-signals on-polymer-signal-positionDock="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="options-dock.css">
         <p on-click="{{leftDock}}">Dock position: Left</p>
         <p on-click="{{rightDock}}">Dock position: Right</p>
@@ -16,6 +15,9 @@
                 left: 'positionChanged',
                 top: 'positionChanged'
             },
+            domReady: function () {
+                this.interval = setTimeout(this.deleteElement.bind(this), 3000);
+            },
             positionChanged: function () {
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
@@ -23,25 +25,33 @@
             },
             leftDock: function () {
                 this.fire('polymer-signal', {
-                    name: "positionDock",
+                    name: "position",
+                    data: "left"
                 });
-//                this.remove();
+                this.deleteElement();
             },
             rightDock: function () {
                 this.fire('polymer-signal', {
-                    name: "positionDock",
+                    name: "position",
+                    data: "right"
                 });
-//                this.remove();
+                this.deleteElement();
             },
             bottomDock: function () {
                 this.fire('polymer-signal', {
-                    name: "positionDock",
+                    name: "position",
+                    data: "bottom"
                 });
-//                this.remove();
+                this.deleteElement();
             },
-            menuShare: function (e, detail, f) {
-                console.log(detail)
-                console.log("hola");
+            deleteElement: function () {
+                this.remove();
+            },
+            hover: function () {
+                clearTimeout(this.interval);
+            },
+            resetInterval: function () {
+                this.interval = setTimeout(this.deleteElement.bind(this), 1000);
             }
         });
     </script>

@@ -1,9 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="options-dock.html">
 
-<polymer-element name="dock-base" attributes="" class="bottom-position" on-contextmenu="{{rightClicked}}">
+<polymer-element name="dock-base" attributes="" class="bottom" on-contextmenu="{{rightClicked}}">
     <template>
-        <polymer-signals on-polymer-signal-positionDock="{{updatePosition}}"></polymer-signals>
+        <polymer-signals on-polymer-signal-position="{{dockPosition}}"></polymer-signals>
         <link rel="stylesheet" href="dock-base.css">
         <content></content>
     </template>
@@ -12,17 +12,27 @@
             ready: function () {},
             rightClicked: function (event, detail, sender) {
                 event.preventDefault();
+                if (document.getElementsByTagName("options-dock")[0] !== undefined) {
+                    document.getElementsByTagName("options-dock")[0].remove();
+                }
                 var container = document.getElementsByTagName("window-container")[0];
                 var modal = document.createElement("options-dock");
-                modal.setAttribute("left", event.clientX - 125);
-                modal.setAttribute("top", event.clientY - 150);
+                if (this.classList.contains("bottom")) {
+                    modal.setAttribute("left", event.clientX - 125);
+                    modal.setAttribute("top", window.innerHeight - 170); //specific value
+                } else if (this.classList.contains("right")) {
+                    modal.setAttribute("left", window.innerWidth -275);
+                    modal.setAttribute("top", event.clientY - 50); //specific value
+                } else {
+                    modal.setAttribute("left", 80);
+                    modal.setAttribute("top", event.clientY - 50); //specific value
+                }
                 container.appendChild(modal);
                 return false;
             },
-            updatePosition: function (e, detail, sender) {
-                console.log("hola?");
-                console.log(detail);
-                
+            dockPosition: function (event, detail, sender) {
+                this.className = "";
+                this.className = detail;
             }
         });
     </script>

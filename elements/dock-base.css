@@ -2,38 +2,30 @@
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
     overflow-y: hidden;
+    z-index: 20;
 }
-:host(.left-position:host) {
+:host(.left:host) {
     padding: 12px 0;
     margin: auto;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 72px;
-    height: 70%;
+    width: 70px;
+    height: 60%;
 }
-:host(.right-position:host) {
+:host(.right:host) {
     padding: 12px 0;
     margin: auto;
     top: 0;
     right: 0;
     bottom: 0;
     width: 70px;
-    height: 70%;
+    height: 60%;
 }
-:host(.bottom-position:host) {
-    left: 0; bottom: 0; right: 0;
+:host(.bottom:host) {
+    left: 0; right: 0;
     margin: auto;
     bottom: 0;
-    width: 70%;
+    width: 60%;
     height: 70px;
-}
-#optionsDock {
-    top: 0;
-    right: 0;
-    display: none;
-    position: absolute;
-    width: 250px;
-    height: 120px;
-    background-color: red;
 }

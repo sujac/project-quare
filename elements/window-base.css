@@ -4,8 +4,14 @@
     -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
 }
-:host(.active:host) {} 
+:host(.active:host) {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    border: 1px solid rgba(85, 85, 85, 0.5);
+} 
 
 .dragging {
     cursor: auto;
