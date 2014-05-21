@@ -10,51 +10,36 @@
         </div>
         <table class="content">
             <tr>
-                <td on-click="{{buttonPressed}}">C</td>
-                <td on-click="{{buttonPressed}}">`</td>
-                <td on-click="{{buttonPressed}}">%</td>
-                <td on-click="{{buttonPressed}}">*</td>
+                <td on-click="{{cleanEvent}}">C</td>
+                <td on-click="{{buttonPressed}}">&#177;</td>
+                <td on-click="{{percentagePressed}}">%</td>
+                <td on-click="{{dividePressed}}">&#247;</td>
             </tr>
             <tr>
                 <td on-click="{{buttonPressed}}">7</td>
                 <td on-click="{{buttonPressed}}">8</td>
                 <td on-click="{{buttonPressed}}">9</td>
-                <td on-click="{{buttonPressed}}">X</td>
+                <td on-click="{{multiPressed}}">&#215;</td>
             </tr>
+            <tr>
+                <td on-click="{{buttonPressed}}">4</td>
+                <td on-click="{{buttonPressed}}">5</td>
+                <td on-click="{{buttonPressed}}">6</td>
+                <td on-click="{{buttonPressed}}">-</td>
+            </tr>
+            <tr>
+                <td on-click="{{buttonPressed}}">1</td>
+                <td on-click="{{buttonPressed}}">2</td>
+                <td on-click="{{buttonPressed}}">3</td>
+                <td on-click="{{buttonPressed}}">+</td>
+            </tr>
+            <tr>
+                <td on-click="{{buttonPressed}}" colspan="2">0</td>
+                <td on-click="{{buttonPressed}}">.</td>
+                <td on-click="{{resultat}}" id="rest">=</td>
+            </tr>
+
         </table>
-        <!--
-        <section class="content">
-            <div class="row">
-                <div class="button-number" on-click="{{buttonPressed}}">C</div>
-                <div class="button-number" on-click="{{buttonPressed}}"></div>
-                <div class="button-number" on-click="{{buttonPressed}}">%</div>
-                <div class="button-number">*</div>
-            </div>
-            <div class="row">
-                <div class="button-number" on-click="{{buttonPressed}}">7</div>
-                <div class="button-number" on-click="{{buttonPressed}}">8</div>
-                <div class="button-number" on-click="{{buttonPressed}}">9</div>
-                <div class="button-number" on-click="{{buttonPressed}}">x</div>
-            </div>
-            <div class="row">
-                <div class="button-number" on-click="{{buttonPressed}}">4</div>
-                <div class="button-number" on-click="{{buttonPressed}}">5</div>
-                <div class="button-number" on-click="{{buttonPressed}}">6</div>
-                <div class="button-number" on-click="{{buttonPressed}}">-</div>
-            </div>
-            <div class="row">
-                <div class="button-number" on-click="{{buttonPressed}}">1</div>
-                <div class="button-number" on-click="{{buttonPressed}}">2</div>
-                <div class="button-number" on-click="{{buttonPressed}}">3</div>
-                <div class="button-number" on-click="{{buttonPressed}}">+</div>
-            </div>
-            <div class="row">
-                <div class="button-number half-width" on-click="{{buttonPressed}}">0</div>
-                <div class="button-number" on-click="{{buttonPressed}}">.</div>
-                <div class="button-number" id="rest" on-click="{{buttonPressed}}">=</div>
-            </div>
-        </section>
--->
     </template>
     <script>
         Polymer('calculator-app', {
@@ -84,11 +69,29 @@
             getOptions: function () {
                 return this.options;
             },
+            cleanEvent: function (event, detail, sender) {
+                this.operations = "";
+            },
+            percentagePressed: function () {
+                this.operations += "%";
+                var result = parseFloat(this.operations) / 100.0;
+                this.$.resultat.innerHTML = result;
+            },
+            dividePressed: function () {
+                this.operations += "/";
+            },
+            multiPressed: function () {
+                this.operations += "*";
+            },
             buttonPressed: function (event, detail, sender) {
-                (sender.id == "rest") ? this.calculate() : this.operations += event.target.textContent;
+                this.operations += event.target.textContent;
+            },
+            resultat: function () {
+                this.calculate()
             },
             calculate: function () {
-                this.$.resultat.innerHTML = eval(this.$.operations.textContent);
+                var num =  eval(this.$.operations.textContent);
+                this.$.resultat.innerHTML = Math.round(num * 100) / 100;
             }
         });
     </script>
