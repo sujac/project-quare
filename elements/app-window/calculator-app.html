@@ -8,6 +8,21 @@
             <p id="operations">{{operations}}</p>
             <p id="resultat">{{result}}</p>
         </div>
+        <table class="content">
+            <tr>
+                <td on-click="{{buttonPressed}}">C</td>
+                <td on-click="{{buttonPressed}}">`</td>
+                <td on-click="{{buttonPressed}}">%</td>
+                <td on-click="{{buttonPressed}}">*</td>
+            </tr>
+            <tr>
+                <td on-click="{{buttonPressed}}">7</td>
+                <td on-click="{{buttonPressed}}">8</td>
+                <td on-click="{{buttonPressed}}">9</td>
+                <td on-click="{{buttonPressed}}">X</td>
+            </tr>
+        </table>
+        <!--
         <section class="content">
             <div class="row">
                 <div class="button-number" on-click="{{buttonPressed}}">C</div>
@@ -39,6 +54,7 @@
                 <div class="button-number" id="rest" on-click="{{buttonPressed}}">=</div>
             </div>
         </section>
+-->
     </template>
     <script>
         Polymer('calculator-app', {
