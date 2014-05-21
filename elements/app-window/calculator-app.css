@@ -8,7 +8,9 @@
     width: 100%;
     height: 30%;
 }
-p {margin: 0;}
+p {
+    margin: 0;
+}
 #operations {
     text-align: right;
     padding: 10px;
@@ -48,4 +50,13 @@ td:nth-child(4n),
     color: white;
     border-right: none;
     background-color: RGB(246, 142, 17);
+}
+td,
+#operations,
+#resultat {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }

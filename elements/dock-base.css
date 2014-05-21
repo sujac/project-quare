@@ -3,6 +3,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     overflow-y: hidden;
     z-index: 20;
+    text-align:center
 }
 :host(.left:host) {
     padding: 12px 0;
@@ -29,3 +30,9 @@
     width: 60%;
     height: 70px;
 }
+#icon-container {
+    display:inline-block;
+    width: auto;
+}
+
+/*http://codepen.io/chriscoyier/pen/gsodI*/
