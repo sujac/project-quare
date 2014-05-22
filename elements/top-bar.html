@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="x-clock.html">
 
 <polymer-element name="top-bar" attributes="">
     <template>
@@ -14,12 +15,19 @@
             <li>Window</li>
             <li>Help</li>
         </ul>
-        <span id="time"></span>
+        <ul class="icon">
+            <li on-click="{{clickedOption}}" id="time"><x-clock></x-clock></li>
+            <li on-click="{{clickedOption}}" id="user" class="base-icon icon-user"></li>
+            <li on-click="{{clickedOption}}" id="music" class="base-icon icon-music"></li>
+            <li on-click="{{clickedOption}}" id="mail" class="base-icon icon-mail"></li>
+            <li on-click="{{clickedOption}}" id="alarm" class="base-icon icon-alarm"></li>
+            <li on-click="{{clickedOption}}" id="bluetooth" class="base-icon icon-bluetooth"></li>
+            <li on-click="{{clickedOption}}" id="settings" class="base-icon icon-cog"></li>
+        </ul>        
     </template>
     <script>
         Polymer('top-bar', {
             domReady: function () {
-                this.interval = setInterval(this.startTime.bind(this), 1000);
             },
             menuSignal: function (e, detail, sender) {
                 this.$.menu.innerHTML = "<li><b>" + detail[0] + "</b></li>";;
@@ -27,21 +35,17 @@
                     this.$.menu.innerHTML += "<li>" + detail[i] + "</li>";
                 }
             },
-            startTime: function () {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
-                m = this.checkTime(m);
-                s = this.checkTime(s);
-                this.$.time.innerHTML = h + ":" + m + ":" + s;
+            clickedOption: function (e, detail, sender) {
+                Polymer.import(['elements/dropdown/' + sender.id + '-dropdown.html'], function () {
+                    this.onComplete(sender.id, e.clientX);
+                }.bind(this));
             },
-            checkTime: function (i) {
-                if (i < 10) {
-                    i = "0" + i
-                }; 
-                return i;
-            }
+            onComplete: function (name, coordX) {
+                var container = document.getElementsByTagName("window-container")[0];
+                var options = document.createElement(name + "-dropdown");
+                options.setAttribute("left", coordX);
+                container.appendChild(options);
+            },
         });
     </script>
 </polymer-element>

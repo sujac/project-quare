@@ -4,11 +4,12 @@
     height: 35px;
     font-weight: 300;
 }
-ul, .apple, #time {
+ul, .apple, x-clock {
     text-shadow: 0 2px 2px rgba(0, 0, 0, .2);
     color: #fff;
 }
 ul {
+    float: left;
     list-style: none;
     margin: 7px 20px;
     padding: 0;
@@ -23,6 +24,12 @@ li {
     font-size: 20px;
 }
 #time {
+    margin-top: 3px;   
+}
+.icon {
     float: right;
-    margin: 2px 20px;    
+    margin-right: 30px;
+}
+.base-icon {
+    font-size: 24px;
 }

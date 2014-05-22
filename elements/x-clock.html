@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="x-clock" attributes="">
+    <template>
+        <span id="time"></span>
+    </template>
+    <script>
+        Polymer('x-clock', {
+            domReady: function () {
+                this.interval = setInterval(this.startTime.bind(this), 1000);
+            },
+            startTime: function () {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = this.checkTime(m);
+                s = this.checkTime(s);
+                this.$.time.innerHTML = h + ":" + m + ":" + s;
+            },
+            checkTime: function (i) {
+                if (i < 10) {
+                    i = "0" + i
+                }; 
+                return i;
+            }
+        });
+    </script>
+</polymer-element>

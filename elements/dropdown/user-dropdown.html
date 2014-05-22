@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="user-dropdown" attributes="left" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
+    <template>
+        <link rel="stylesheet" href="user-dropdown.css">
+        <p>pues aqui....</p>
+    </template>
+    <script>
+        Polymer('user-dropdown', {
+            left: 0,
+            width: 0,
+            domReady: function () {
+                this.interval = setTimeout(this.deleteElement.bind(this), 3000);
+            },
+            leftChanged: function () {
+                var s = this.style;
+                this.width = this.getWidth();
+                var width = this.left - (this.width - 16);
+                var translate = "translate(" + width + "px, 50px)";
+                s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
+            },
+            deleteElement: function () {
+                this.remove();
+            },
+            hover: function () {
+                clearTimeout(this.interval);
+            },
+            resetInterval: function () {
+                this.interval = setTimeout(this.deleteElement.bind(this), 1000);
+            },
+            getWidth: function () {
+                var style = window.getComputedStyle(this).getPropertyValue('width');
+                return parseInt(style.substring(0, style.length - 2));
+            }
+            
+        });
+    </script>
+</polymer-element>
