@@ -1,32 +1,31 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="user-dropdown" attributes="left" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
+<polymer-element name="base-dropdown" attributes="left" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
     <template>
-        <link rel="stylesheet" href="user-dropdown.css">
-        <p>pues aqui....</p>
+        <link rel="stylesheet" href="base-dropdown.css">
     </template>
     <script>
-        Polymer('user-dropdown', {
+        Polymer('base-dropdown', {
             left: 0,
             width: 0,
             domReady: function () {
-                this.interval = setTimeout(this.deleteElement.bind(this), 3000);
+//                this.interval = setTimeout(this.hideElement.bind(this), 3000);
             },
             leftChanged: function () {
                 var s = this.style;
                 this.width = this.getWidth();
-                var width = this.left - (this.width - 16);
+                var width = this.left - (this.width - 20);
                 var translate = "translate(" + width + "px, 50px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
             },
-            deleteElement: function () {
+            hideElement: function () {
                 this.remove();
             },
             hover: function () {
                 clearTimeout(this.interval);
             },
             resetInterval: function () {
-                this.interval = setTimeout(this.deleteElement.bind(this), 1000);
+//                this.interval = setTimeout(this.hideElement.bind(this), 1000);
             },
             getWidth: function () {
                 var style = window.getComputedStyle(this).getPropertyValue('width');

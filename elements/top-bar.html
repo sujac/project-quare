@@ -16,19 +16,20 @@
             <li>Help</li>
         </ul>
         <ul class="icon">
-            <li on-click="{{clickedOption}}" id="time"><x-clock></x-clock></li>
+            <li on-click="{{clickedOption}}" id="time">
+                <x-clock></x-clock>
+            </li>
             <li on-click="{{clickedOption}}" id="user" class="base-icon icon-user"></li>
             <li on-click="{{clickedOption}}" id="music" class="base-icon icon-music"></li>
             <li on-click="{{clickedOption}}" id="mail" class="base-icon icon-mail"></li>
             <li on-click="{{clickedOption}}" id="alarm" class="base-icon icon-alarm"></li>
             <li on-click="{{clickedOption}}" id="bluetooth" class="base-icon icon-bluetooth"></li>
             <li on-click="{{clickedOption}}" id="settings" class="base-icon icon-cog"></li>
-        </ul>        
+        </ul>
     </template>
     <script>
         Polymer('top-bar', {
-            domReady: function () {
-            },
+            domReady: function () {},
             menuSignal: function (e, detail, sender) {
                 this.$.menu.innerHTML = "<li><b>" + detail[0] + "</b></li>";;
                 for (i = 1; i < detail.length; i++) {
@@ -41,7 +42,10 @@
                 }.bind(this));
             },
             onComplete: function (name, coordX) {
-                var container = document.getElementsByTagName("window-container")[0];
+                var container = document.getElementsByTagName("dropdown-container")[0];
+                if (container.firstChild !== null) {
+                    container.firstChild.remove();
+                }
                 var options = document.createElement(name + "-dropdown");
                 options.setAttribute("left", coordX);
                 container.appendChild(options);
