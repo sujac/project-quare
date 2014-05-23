@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="../css/icons.css">
         <span class="apple icon-apple"></span>
         <ul id="menu">
-            <li><b>Finder</b></li>
+            <li><b>Finder</b>
+            </li>
             <li>File</li>
             <li>Edit</li>
             <li>View</li>
@@ -29,6 +30,7 @@
     </template>
     <script>
         Polymer('top-bar', {
+            buttonClicked: "",
             domReady: function () {},
             menuSignal: function (e, detail, sender) {
                 this.$.menu.innerHTML = "<li><b>" + detail[0] + "</b></li>";;
@@ -37,11 +39,13 @@
                 }
             },
             clickedOption: function (e, detail, sender) {
-                sender.classList.add("pulse");
+                this.buttonClicked =  sender; 
+                this.buttonClicked.classList.add("pulse");
+                this.interval = setTimeout(this.deleteClass.bind(this), 800);
                 Polymer.import(['elements/dropdown/' + sender.id + '-dropdown.html'], function () {
                     this.onComplete(sender.id, e.clientX);
                 }.bind(this));
-                
+
             },
             onComplete: function (name, coordX) {
                 var container = document.getElementsByTagName("dropdown-container")[0];
@@ -52,6 +56,9 @@
                 options.setAttribute("left", coordX);
                 container.appendChild(options);
             },
+            deleteClass: function () {
+                this.buttonClicked.classList.remove("pulse");
+            }
         });
     </script>
 </polymer-element>
