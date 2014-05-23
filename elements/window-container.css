@@ -6,8 +6,8 @@
 }
 
 :host(.wallpaper1:host) {
-    background-image: url('../../img/wallpaper1.jpg');
+    background-image: url('../img/wallpaper1.jpg');
 }
 :host(.wallpaper2:host) {
-    background-image: url('../../img/wallpaper2.jpg');
+    background-image: url('../img/wallpaper2.jpg');
 }

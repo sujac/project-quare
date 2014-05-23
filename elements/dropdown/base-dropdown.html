@@ -3,6 +3,7 @@
 <polymer-element name="base-dropdown" attributes="left" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
     <template>
         <link rel="stylesheet" href="base-dropdown.css">
+        <div class="box"></div>
     </template>
     <script>
         Polymer('base-dropdown', {
@@ -15,8 +16,7 @@
                 var s = this.style;
                 this.width = this.getWidth();
                 var width = this.left - (this.width - 20);
-                var translate = "translate(" + width + "px, 50px)";
-                s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
+                s.left = width + "px";
             },
             hideElement: function () {
                 this.remove();

@@ -37,9 +37,11 @@
                 }
             },
             clickedOption: function (e, detail, sender) {
+                sender.classList.add("pulse");
                 Polymer.import(['elements/dropdown/' + sender.id + '-dropdown.html'], function () {
                     this.onComplete(sender.id, e.clientX);
                 }.bind(this));
+                
             },
             onComplete: function (name, coordX) {
                 var container = document.getElementsByTagName("dropdown-container")[0];
