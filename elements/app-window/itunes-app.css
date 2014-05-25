@@ -1,0 +1,6 @@
+:host {
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 40px);
+    background-color: red;
+}

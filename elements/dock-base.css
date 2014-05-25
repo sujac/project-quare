@@ -1,9 +1,9 @@
 :host {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
     overflow-y: hidden;
     z-index: 20;
-    text-align:center
+    text-align:center;
+    background-color: rgba(227, 244, 253, 0.55);
 }
 :host(.left:host) {
     padding: 12px 0;
@@ -12,7 +12,7 @@
     left: 0;
     bottom: 0;
     width: 70px;
-    height: 60%;
+    height: 410px;
 }
 :host(.right:host) {
     padding: 12px 0;
@@ -21,18 +21,21 @@
     right: 0;
     bottom: 0;
     width: 70px;
-    height: 60%;
+    height: 410px;
 }
 :host(.bottom:host) {
     left: 0; right: 0;
     margin: auto;
     bottom: 0;
-    width: 60%;
+    width: 410px;
     height: 70px;
 }
 #icon-container {
     display:inline-block;
     width: auto;
+    
 }
+/*glossy effect*/
+/*http://jsfiddle.net/nallenscott/WtQjY/41/*/
 
 /*http://codepen.io/chriscoyier/pen/gsodI*/

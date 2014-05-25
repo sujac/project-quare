@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/platform/platform.js"></script>
     <link rel="import" href="elements/import-base.html">
+    <link rel="import" href="elements/desktop-base.html">
     <link rel="import" href="elements/polymer-signals.html">
     <link rel="import" href="elements/top-bar.html">
     <link rel="import" href="elements/window-base.html">
@@ -20,17 +21,18 @@
 
 <body>
     <import-base></import-base>
-    <top-bar></top-bar>
-    <dock-base>
-        <dock-icon name="finder"></dock-icon>
-        <dock-icon name="safari"></dock-icon>
-        <dock-icon name="itunes"></dock-icon>
-        <dock-icon name="calculator"></dock-icon>
-        <dock-icon name="editor"></dock-icon>
-        <dock-icon name="settings"></dock-icon>
-    </dock-base>
-    <dropdown-container></dropdown-container>
-    <window-container></window-container>
+    <desktop-base>
+        <top-bar></top-bar>
+        <dock-base>
+            <dock-icon name="finder"></dock-icon>
+            <dock-icon name="safari"></dock-icon>
+            <dock-icon name="itunes"></dock-icon>
+            <dock-icon name="calculator"></dock-icon>
+            <dock-icon name="editor"></dock-icon>
+        </dock-base>
+        <dropdown-container></dropdown-container>
+        <window-container></window-container>
+    </desktop-base>
 </body>
 
 </html>

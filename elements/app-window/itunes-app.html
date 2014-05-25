@@ -1,17 +1,18 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="settings-app" attributes="">
+<polymer-element name="itunes-app" attributes="options">
     <template>
-        <polymer-signals on-polymer-signal-settings="{{menuShare}}"></polymer-signals>
-        <link rel="stylesheet" href="settings-app.css">
-        <p>jo soc els settings</p>
+        <polymer-signals on-polymer-signal-itunes="{{menuShare}}"></polymer-signals>
+        <link rel="stylesheet" href="itunes-app.css">
     </template>
     <script>
-        Polymer('settings-app', {
-            menu: ["Settings", "Edit", "View", "Window", "Help"],
+        Polymer('itunes-app', {
+            menu: ["iTunes", "File", "Edit", "View", "Controls", "Store", "Advanced", "Window", "Help"],
             options: {
-                "top": 250,
-                "left": 120
+                "top": 150,
+                "left": 300,
+                "width": 720,
+                "height": 550
             },
             domReady: function () {
                 this.menuShare();

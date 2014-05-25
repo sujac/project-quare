@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="editor-app" attributes="options">
+    <template>
+        <polymer-signals on-polymer-signal-editor="{{menuShare}}"></polymer-signals>
+        <link rel="stylesheet" href="../../css/icons.css">
+        <link rel="stylesheet" href="editor-app.css">
+        <div id="text-options">
+            <ul>
+                <li on-click="{{boldText}}" class="base-icon icon-bold"></li>
+                <li on-click="{{underlineText}}" class="base-icon icon-underline"></li>
+                <li on-click="{{italicText}}" class="base-icon icon-italic"></li>
+                <li on-click="{{subText}}" class="base-icon icon-strikethrough"></li>
+                <li on-click="{{leftText}}" class="base-icon icon-paragraph-left"></li>
+                <li on-click="{{centerText}}" class="base-icon icon-paragraph-center"></li>
+                <li on-click="{{rightText}}" class="base-icon icon-paragraph-right"></li>
+                <li on-click="{{justifyText}}" class="base-icon icon-paragraph-justify"></li>
+            </ul>
+        </div>
+        <textarea autofocus id="textbox">
+        </textarea>
+    </template>
+    <script>
+        Polymer('editor-app', {
+            menu: ["TextEdit", "File", "Edit", "View", "Window", "Help"],
+            options: {
+                "top": 100,
+                "left": 350,
+                "width": 500,
+                "height": 550
+            },
+            domReady: function () {
+                this.menuShare();
+            },
+            attached: function () {
+                this.async(function () {
+                    this.parentNode.accesChild(this);
+                });
+            },
+            menuShare: function () {
+                this.fire('polymer-signal', {
+                    name: "menu",
+                    data: this.menu
+                });
+            },
+            getOptions: function () {
+                return this.options;
+            },
+            boldText: function () {
+                this.$.textbox.classList.contains("bold") ? this.$.textbox.classList.remove("bold") : this.$.textbox.classList.add("bold");
+            },
+            underlineText: function () {
+                this.$.textbox.classList.contains("underline") ? this.$.textbox.classList.remove("underline") : this.$.textbox.classList.add("underline");
+            },
+            italicText: function () {
+                this.$.textbox.classList.contains("italic") ? this.$.textbox.classList.remove("italic") : this.$.textbox.classList.add("italic");
+            },
+            subText: function () {
+                this.$.textbox.classList.contains("sub") ? this.$.textbox.classList.remove("sub") : this.$.textbox.classList.add("sub");
+            },
+            leftText: function () {
+                this.$.textbox.classList.contains("left") ? this.$.textbox.classList.remove("left") : this.$.textbox.classList.add("left");
+                this.$.textbox.classList.remove("center");
+                this.$.textbox.classList.remove("right");
+                this.$.textbox.classList.remove("justify");
+            },
+            centerText: function () {
+                this.$.textbox.classList.contains("center") ? this.$.textbox.classList.remove("center") : this.$.textbox.classList.add("center");
+                this.$.textbox.classList.remove("left");
+                this.$.textbox.classList.remove("right");
+                this.$.textbox.classList.remove("justify");
+            },
+            rightText: function () {
+                this.$.textbox.classList.contains("right") ? this.$.textbox.classList.remove("right") : this.$.textbox.classList.add("right");
+                this.$.textbox.classList.remove("center");
+                this.$.textbox.classList.remove("left");
+                this.$.textbox.classList.remove("justify");
+            },
+            justifyText: function () {
+                this.$.textbox.classList.contains("justify") ? this.$.textbox.classList.remove("justify") : this.$.textbox.classList.add("justify");
+                this.$.textbox.classList.remove("center");
+                this.$.textbox.classList.remove("right");
+                this.$.textbox.classList.remove("left");
+            }
+        });
+    </script>
+</polymer-element>

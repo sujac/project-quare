@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="safari-app" attributes="options">
+    <template>
+        <polymer-signals on-polymer-signal-safari="{{menuShare}}"></polymer-signals>
+        <link rel="stylesheet" href="safari-app.css">
+        <iframe src="http://www.bing.com" frameborder="0"></iframe>
+    </template>
+    <script>
+        Polymer('safari-app', {
+            menu: ["Safari", "File", "Edit", "View", "History", "Bookmarks",  "Window", "Help"],
+            options: {
+                "top": 100,
+                "left": 350,
+                "width": 800,
+                "height": 600
+            },
+            domReady: function () {
+                this.menuShare();
+            },
+            attached: function () {
+                this.async(function () {
+                    this.parentNode.accesChild(this);
+                });
+            },
+            menuShare: function () {
+                this.fire('polymer-signal', {
+                    name: "menu",
+                    data: this.menu
+                });
+            },
+            getOptions: function () {
+                return this.options;
+            }
+        });
+    </script>
+</polymer-element>

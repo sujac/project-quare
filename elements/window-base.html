@@ -180,6 +180,10 @@
                 this.options(child.getOptions());
             },
             closeWindow: function (event, detail, sender) {
+                this.fire('polymer-signal', {
+                    name: "closed",
+                    data: this.name
+                });
                 this.remove();
             },
             maximizeWindow: function (event, detail, sender) {
