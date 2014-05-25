@@ -11,3 +11,6 @@
 :host(.wallpaper2:host) {
     background-image: url('../img/wallpaper2.jpg');
 }
+:host(.wallpaper3:host) {
+    background-image: url('../img/wallpaper3.jpg');
+}

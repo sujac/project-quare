@@ -60,27 +60,27 @@
             },
             leftText: function () {
                 this.$.textbox.classList.contains("left") ? this.$.textbox.classList.remove("left") : this.$.textbox.classList.add("left");
-                this.$.textbox.classList.remove("center");
-                this.$.textbox.classList.remove("right");
-                this.$.textbox.classList.remove("justify");
+                this.removeClasses("left");
             },
             centerText: function () {
                 this.$.textbox.classList.contains("center") ? this.$.textbox.classList.remove("center") : this.$.textbox.classList.add("center");
-                this.$.textbox.classList.remove("left");
-                this.$.textbox.classList.remove("right");
-                this.$.textbox.classList.remove("justify");
+                this.removeClasses("center");
             },
             rightText: function () {
                 this.$.textbox.classList.contains("right") ? this.$.textbox.classList.remove("right") : this.$.textbox.classList.add("right");
-                this.$.textbox.classList.remove("center");
-                this.$.textbox.classList.remove("left");
-                this.$.textbox.classList.remove("justify");
+                this.removeClasses("right");
             },
             justifyText: function () {
                 this.$.textbox.classList.contains("justify") ? this.$.textbox.classList.remove("justify") : this.$.textbox.classList.add("justify");
-                this.$.textbox.classList.remove("center");
-                this.$.textbox.classList.remove("right");
-                this.$.textbox.classList.remove("left");
+                this.removeClasses("justify");
+            },
+            removeClasses: function (nameClass) {
+                var aClasses = ["left", "center", "right", "justify"]
+                var position = aClasses.indexOf(nameClass);
+                aClasses.splice(position, 1);
+                for (i = 0; i < aClasses.length; i++) {
+                    this.$.textbox.classList.remove(aClasses[i])
+                }
             }
         });
     </script>

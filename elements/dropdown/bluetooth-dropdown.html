@@ -4,11 +4,38 @@
 <polymer-element name="bluetooth-dropdown" extends="base-dropdown">
     <template>
         <link rel="stylesheet" href="bluetooth-dropdown.css">
-        <p>pues si si si....</p>
+        <link rel="stylesheet" href="../../css/icons.css">
+        <table>
+            <tr>
+                <td class="icon icon-headphones"></td>
+                <td>Sennheiser MM 500-X</td>
+            </tr>
+            <tr>
+                <td class="icon icon-print"></td>
+                <td>Epson RX</td>
+            </tr>
+            <tr>
+                <td class="icon icon-mobile-phone"></td>
+                <td>iPhone 6</td>
+            </tr>
+            <tr>
+                <td class="icon icon-tablet"></td>
+                <td>iPad Pro</td>
+            </tr>
+            <tr>
+                <td id="button">
+                    <input type="checkbox" id="toggle" on-change="{{bluetoothChange}}">
+                    <label for="toggle"></label>
+                </td>
+                <td>
+                    <p>Bluetooth</p><span class="icon icon-max_2"></span>
+                </td>
+            </tr>
     </template>
     <script>
         Polymer('bluetooth-dropdown', {
-                        
+            domReady: function () {},
+            bluetoothChange: function (e, detail, sender) {}
         });
     </script>
 </polymer-element>

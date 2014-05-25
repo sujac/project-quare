@@ -4,11 +4,36 @@
 <polymer-element name="alarm-dropdown" extends="base-dropdown">
     <template>
         <link rel="stylesheet" href="alarm-dropdown.css">
-        <p>pues si si si....</p>
+        <link rel="stylesheet" href="../../css/icons.css">
+        <table>
+            <tr>
+                <td class="icon icon-bell"></td>
+                <td>19:30</td>
+                <td class="icon-d icon-tablet"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-bell"></td>
+                <td>8:30</td>
+                <td class="icon-d icon-mobile-phone"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-alarm"></td>
+                <td>21:30</td>
+                <td class="icon-d icon-mobile-phone"></td>
+            </tr>
+            <tr>
+                <td class="icon icon icon-bell"></td>
+                <td>8:00</td>
+                <td class="icon-d icon-desktop"></td>
+            </tr>
+            <tr>
+                <td id="add" colspan="3" class="icon icon-plus3"></td>
+            </tr>
+        </table>
     </template>
     <script>
         Polymer('alarm-dropdown', {
-                        
+
         });
     </script>
 </polymer-element>

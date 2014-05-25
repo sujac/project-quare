@@ -4,14 +4,135 @@
     <template>
         <polymer-signals on-polymer-signal-finder="{{menuShare}}"></polymer-signals>
         <link rel="stylesheet" href="finder-app.css">
-        <p>soc el finder</p>
+        <link rel="stylesheet" href="../../css/icons.css">
+        <aside>
+            <h4>Favourites</h4>
+            <table id="aside">
+                <tr>
+                    <td class="icon-house"></td>
+                    <td>Home</td>
+                </tr>
+                <tr id="selected">
+                    <td class="icon-drawer3"></td>
+                    <td>All My Files</td>
+                </tr>
+                <tr>
+                    <td class="icon-music"></td>
+                    <td>Music</td>
+                </tr>
+                <tr>
+                    <td class="icon-video"></td>
+                    <td>Movies</td>
+                </tr>
+                <tr>
+                    <td class="icon-pictures"></td>
+                    <td>Photos</td>
+                </tr>
+                <tr>
+                    <td class="icon-music"></td>
+                    <td>Music</td>
+                </tr>
+                <tr>
+                    <td class="icon-box-add"></td>
+                    <td>Downloads</td>
+                </tr>
+            </table>
+        </aside>
+        <section id="content">
+            <table id="base-content">
+                <tr>
+                    <td>Name</td>
+                    <td>Kind</td>
+                    <td>Size</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-article"></span>
+                        <p>Resum.odt</p>
+                    </td>
+                    <td>Text file</td>
+                    <td>23 KB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-photoshop"></span>
+                        <p>Mockup.psd</p>
+                    </td>
+                    <td>Photoshop file</td>
+                    <td>16 MB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-file"></span>
+                        <p>Anàlisi.txt</p>
+                    </td>
+                    <td>Text file</td>
+                    <td>43 KB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-folder"></span>
+                        <p>Notes</p>
+                    </td>
+                    <td>Folder</td>
+                    <td>13 MB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-folder"></span>
+                        <p>Projects</p>
+                    </td>
+                    <td>Folder</td>
+                    <td>1 GB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-article"></span>
+                        <p>Resum UF3.odt</p>
+                    </td>
+                    <td>Text file</td>
+                    <td>13 KB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-illustrator"></span>
+                        <p>Icons.ai</p>
+                    </td>
+                    <td>Illustrator file</td>
+                    <td>5 MB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-photoshop"></span>
+                        <p>Concept.psd</p>
+                    </td>
+                    <td>Photoshop file</td>
+                    <td>13 MB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-article"></span>
+                        <p>Notes.pages</p>
+                    </td>
+                    <td>Text file</td>
+                    <td>54 KB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-pictures"></span>
+                        <p>SONY-0032.jpg</p>
+                    </td>
+                    <td>JPEG image</td>
+                    <td>2 MB</td>
+                </tr>
+                <tr>
+                    <td class="name-file"><span class="icon-videos"></span>
+                        <p>MATRIX</p>
+                    </td>
+                    <td>MKV movie</td>
+                    <td>3 GB</td>
+                </tr>
+            </table>
+        </section>
     </template>
     <script>
         Polymer('finder-app', {
             menu: ["Finder", "File", "Edit", "View", "Window", "Help"],
             options: {
                 "top": 100,
-                "left": 250
+                "left": 250,
+                "width": 720,
+                "height": 550
             },
             domReady: function () {
                 this.menuShare();

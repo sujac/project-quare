@@ -1,0 +1,40 @@
+:host {
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+table {
+    margin-top: -3px;
+    width: 100%;
+    height: calc(100% + 3px);
+    border-collapse: collapse;
+}
+tr {
+    height: 16%;
+}
+.days {
+    height: 40px;
+    background-color: RGB(247, 247, 247);
+    border-bottom: 1px solid rgba(78, 78, 78, 0.32);
+}
+td {
+    width: 14.25%;
+    vertical-align: top;
+    text-align: right;
+    padding: 12px;
+    border-right: 1px solid RGB(255, 49, 44);
+    border-bottom: 1px solid RGB(255, 49, 44);
+}
+td:last-child {
+    border-right: none;
+}
+.days td  {
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}

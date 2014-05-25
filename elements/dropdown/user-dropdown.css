@@ -1,4 +1,28 @@
 :host {
-    width: 240px;
-    height: 300px;
+    width: 180px;
+    height: 180px;
+}
+table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+td {
+    border-bottom: 1px solid RGB(206, 214, 218);
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+tr:hover td {
+    color: rgba(126, 126, 126, 0.75);
+}
+.icon {
+    font-size: 20px;
+    color: RGB(85, 85, 85);
+    padding-left: 24px;
 }

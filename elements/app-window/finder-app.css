@@ -1,0 +1,87 @@
+:host {
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+aside {
+    margin-top: -3px;
+    float: left;
+    height: calc(100% + 3px);
+    width: 190px;
+    background-color: RGB(226, 229, 236);
+    box-sizing: border-box;
+    border-right: 1px solid RGB(216, 217, 221);
+}
+table {
+    border: none;
+    border-collapse: collapse;
+}
+#aside {
+    width: 100%;
+}
+#aside tr {
+    padding: 20px;
+    width: 100%;
+}
+#aside td:hover {
+    color: #898989;
+    cursor: auto;
+}
+#aside td {
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    padding: 14px 0;
+}
+#aside td:nth-child(2n+1) {
+    font-size: 25px;
+    padding: 12px;
+    padding-left: 22px;
+    color: rgb(82, 85, 93);
+}
+h4 {
+    margin: 20px;
+    color: #707d8c;
+}
+#content {
+    float: left;
+    width: calc(100% - 190px);
+    height: 100%;
+}
+#base-content {
+    width: 100%;
+}
+#base-content tr {
+    font-size: 14px;
+}
+#base-content tr p {
+    margin: 0;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+}
+#base-content tr span {
+    color: rgb(82, 85, 93);
+    margin-right: 12px;
+    font-size: 16px;
+    float: left;
+}
+#base-content tr:first-child {
+    color: #707d8c;
+    font-size: 16px;
+    font-weight: 800;
+    border-bottom: 1px solid RGB(209, 209, 209);
+}
+#base-content td {
+    padding: 10px 20px;
+    color: #8b8b8b;
+}
+#base-content .name-file {
+    color: black;
+}
+#selected {
+    border-bottom: 1px solid rgba(200, 200, 200, 0.75);
+    border-top: 1px solid rgba(200, 200, 200, 0.75);
+    background-color: RGB(214, 216, 219);
+}
