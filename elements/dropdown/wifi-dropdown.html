@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="base-dropdown.html">
+
+<polymer-element name="wifi-dropdown" extends="base-dropdown">
+    <template>
+        <link rel="stylesheet" href="wifi-dropdown.css">
+        <link rel="stylesheet" href="../../css/icons.css">
+        <table>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>WLAN_4R</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>Jazztel_BG</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>movistar6</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>Orange_T66</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>WLAN_99O</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td class="icon icon-connection"></td>
+                <td>WLAN_475</td>
+                <td class="icon icon-lock"></td>
+            </tr>
+            <tr>
+                <td id="button">
+                    <input type="checkbox" id="toggle" on-change="{{wifiChange}}">
+                    <label for="toggle"></label>
+                </td>
+                <td>Wifi ON</td>
+                <td class="icon icon-cog"></td>
+            </tr>
+    </template>
+    <script>
+        Polymer('wifi-dropdown', {
+            domReady: function () {},
+            bluetoothChange: function (e, detail, sender) {}
+        });
+    </script>
+</polymer-element>

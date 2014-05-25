@@ -9,7 +9,7 @@
             left: 0,
             width: 0,
             domReady: function () {
-//                this.interval = setTimeout(this.hideElement.bind(this), 3000);
+                this.interval = setTimeout(this.hideElement.bind(this), 3000);
             },
             leftChanged: function () {
                 var s = this.style;
@@ -24,7 +24,7 @@
                 clearTimeout(this.interval);
             },
             resetInterval: function () {
-//                this.interval = setTimeout(this.hideElement.bind(this), 1000);
+                this.interval = setTimeout(this.hideElement.bind(this), 1000);
             },
             getWidth: function () {
                 var style = window.getComputedStyle(this).getPropertyValue('width');

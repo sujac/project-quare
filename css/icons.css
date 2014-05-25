@@ -12,6 +12,21 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-search:before {
+	content: "\f002";
+}
+.icon-angle-left:before {
+	content: "\f104";
+}
+.icon-angle-right:before {
+	content: "\f105";
+}
+.icon-angle-up:before {
+	content: "\f106";
+}
+.icon-angle-down:before {
+	content: "\f107";
+}
 .icon-desktop:before {
 	content: "\f108";
 }
@@ -27,8 +42,14 @@
 .icon-headphones:before {
 	content: "\e680";
 }
+.icon-connection:before {
+	content: "\e683";
+}
 .icon-print:before {
 	content: "\e681";
+}
+.icon-menu:before {
+	content: "\e684";
 }
 .icon-home:before {
 	content: "\e605";
@@ -75,7 +96,7 @@
 .icon-cog2:before {
 	content: "\e63a";
 }
-.icon-menu:before {
+.icon-menu2:before {
 	content: "\e60f";
 }
 .icon-play:before {
@@ -180,8 +201,17 @@
 .icon-house:before {
 	content: "\e641";
 }
+.icon-clock:before {
+	content: "\e685";
+}
 .icon-box:before {
 	content: "\e644";
+}
+.icon-lock:before {
+	content: "\e686";
+}
+.icon-lock-open:before {
+	content: "\e687";
 }
 .icon-erase:before {
 	content: "\e682";

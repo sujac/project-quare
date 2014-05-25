@@ -1,4 +1,64 @@
 :host {
-    width: 320px;
-    height: 450px;
+    width: 265px;
+    height: 435px;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+li {
+    padding: 12px 20px;
+    border-bottom: 1px solid RGB(210, 210, 210);
+}
+li:last-child {
+    border-bottom: none;
+}
+h4,
+p {
+    margin: 0;
+}
+.base {
+    display: block;
+}
+.title-mail {
+    float: left;
+}
+.time {
+    float: right;
+    margin: 0 4px;
+}
+.icon {
+    float: right;
+    font-size: 20px;
+    margin: 0 4px;
+}
+.content,
+.icon,
+.time,
+.icon-base,
+.options {
+    color: RGB(143, 143, 143);
+}
+.content {
+    margin-top: 22px;
+    display: block;
+    font-size: 13px;
+}
+.icon-base {
+    float: left;
+    font-size: 24px;
+}
+.options {
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+    float: left;
+    margin: 2px 15px 2px 6px;
+}
+.options:hover {
+    color: RGB(0, 122, 255);
 }
