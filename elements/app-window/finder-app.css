@@ -11,9 +11,17 @@ aside {
     background-color: RGB(226, 229, 236);
     box-sizing: border-box;
     border-right: 1px solid RGB(216, 217, 221);
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+
+    /* No support for these yet, use at own risk */
+    -o-user-select: none;
+    user-select: none;  
 }
 table {
     border: none;
+    border-spacing: 0;
     border-collapse: collapse;
 }
 #aside {
@@ -33,6 +41,7 @@ table {
     -o-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
     padding: 14px 0;
+    font-weight: 300;
 }
 #aside td:nth-child(2n+1) {
     font-size: 25px;
@@ -48,6 +57,14 @@ h4 {
     float: left;
     width: calc(100% - 190px);
     height: 100%;
+    overflow: hidden; /* això s'ha de millorar*/
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+
+    /* No support for these yet, use at own risk */
+    -o-user-select: none;
+    user-select: none;  
 }
 #base-content {
     width: 100%;
@@ -76,6 +93,7 @@ h4 {
 #base-content td {
     padding: 10px 20px;
     color: #8b8b8b;
+    font-weight: 300;
 }
 #base-content .name-file {
     color: black;

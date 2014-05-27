@@ -13,19 +13,18 @@
     -webkit-animation-name: fadeInDown;
     -moz-animation-name: fadeInDown;
     animation-name: fadeInDown;
+    font-weight: 300;
 }
 
 @-webkit-keyframes fadeInDown {
     0% {
         opacity: 0;
-        -webkit-transform: translateY(30px);
-        transform: translateY(30px);
+        top: 30px;
     }
 
     100% {
         opacity: 1;
-        -webkit-transform: translateY(50px);
-        transform: translateY(50px);
+        top: 50px;
     }
 }
 @-moz-keyframes fadeInDown {
@@ -44,15 +43,11 @@
 @keyframes fadeInDown {
     0% {
         opacity: 0;
-        -webkit-transform: translateY(30px);
-        -ms-transform: translateY(30px);
-        transform: translateY(30px);
+        top: 30px;
     }
 
     100% {
         opacity: 1;
-        -webkit-transform: translateY(50px);
-        -ms-transform: translateY(50px);
-        transform: translateY(50px0);
+        top: 50px;
     }
 }
