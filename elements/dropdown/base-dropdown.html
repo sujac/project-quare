@@ -1,36 +1,67 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<!-- Super-element that has the general behavior of a dropdown -->
 <polymer-element name="base-dropdown" attributes="left" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
     <template>
         <link rel="stylesheet" href="base-dropdown.css">
     </template>
     <script>
         Polymer('base-dropdown', {
+            /**
+             * The position where the element should be instanced.
+             *
+             * @attribute left
+             * @type int
+             */
             left: 0,
+            /**
+             * The width of the dropdown.
+             *
+             * @attribute width
+             * @type int
+             */
             width: 0,
+            /**
+             * Element "constructor"
+             */
             domReady: function () {
                 this.interval = setTimeout(this.hideElement.bind(this), 3000);
             },
+            /**
+             * Applay the value of the "left" property
+             */
             leftChanged: function () {
                 var s = this.style;
                 this.width = this.getWidth();
                 var width = this.left - (this.width - 20);
                 s.left = width + "px";
             },
+            /**
+             * remove the element when the time has passed
+             */
             hideElement: function () {
                 this.remove();
             },
+            /**
+             * stops the interval started when you unfocuse the dropdown
+             */
             hover: function () {
                 clearTimeout(this.interval);
             },
+            /**
+             * resets the interval time for the element to be removed
+             */
             resetInterval: function () {
                 this.interval = setTimeout(this.hideElement.bind(this), 1000);
             },
+            /**
+             * Method used to get the value of the width of the element
+             */
             getWidth: function () {
                 var style = window.getComputedStyle(this).getPropertyValue('width');
                 return parseInt(style.substring(0, style.length - 2));
             }
-            
+
         });
     </script>
 </polymer-element>

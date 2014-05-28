@@ -1,5 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="polymer-signals.html">
+
+<!-- Modal window option that display dock options -->
 <polymer-element name="options-dock" attributes="left top" on-mouseover="{{hover}}" on-mouseout="{{resetInterval}}">
     <template>
         <link rel="stylesheet" href="options-dock.css">
@@ -9,20 +11,47 @@
     </template>
     <script>
         Polymer('options-dock', {
+            /**
+             * Position where the menu has to be instanced.
+             *
+             * @attribute left
+             * @type int
+             */
             left: 0,
+            /**
+             * The top distance from where the object has to be instanced (constant)
+             *
+             * @attribute top
+             * @type int
+             */
             top: 0,
+            /**
+             * Moutation observer. When one of this elememnts is changed the postionChanged method is called.
+             *
+             * @attribute left
+             * @type Object
+             */
             observe: {
                 left: 'positionChanged',
                 top: 'positionChanged'
             },
+            /**
+             * Element "constructor". Start an interval
+             */
             domReady: function () {
                 this.interval = setTimeout(this.deleteElement.bind(this), 3000);
             },
+            /**
+             * Sets the position
+             */
             positionChanged: function () {
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
             },
+            /**
+             * Signal trigger for changing the dock posotion to the left
+             */
             leftDock: function () {
                 this.fire('polymer-signal', {
                     name: "position",
@@ -30,6 +59,9 @@
                 });
                 this.deleteElement();
             },
+            /**
+             * Signal trigger for changing the dock posotion to the right
+             */
             rightDock: function () {
                 this.fire('polymer-signal', {
                     name: "position",
@@ -37,6 +69,9 @@
                 });
                 this.deleteElement();
             },
+            /**
+             * Signal trigger for changing the dock posotion to the bottom
+             */
             bottomDock: function () {
                 this.fire('polymer-signal', {
                     name: "position",
@@ -44,12 +79,21 @@
                 });
                 this.deleteElement();
             },
+            /**
+             * Delete the element
+             */
             deleteElement: function () {
                 this.remove();
             },
+            /**
+             * Stop the interval to remove the element when the user is over the element
+             */
             hover: function () {
                 clearTimeout(this.interval);
             },
+            /**
+             * Reset the interval to remove the element when the user hovers over the element
+             */
             resetInterval: function () {
                 this.interval = setTimeout(this.deleteElement.bind(this), 1000);
             }

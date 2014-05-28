@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="options-dock.html">
 
+<!-- Base for the dock-icon elements -->
 <polymer-element name="dock-base" attributes="" class="bottom" on-contextmenu="{{rightClicked}}">
     <template>
         <polymer-signals on-polymer-signal-position="{{dockPosition}}"></polymer-signals>
@@ -10,6 +11,7 @@
     <script>
         Polymer('dock-base', {
             ready: function () {},
+            /* Right click on the dock creates an instance of options-dock where all the options would be displayed */
             rightClicked: function (event, detail, sender) {
                 event.preventDefault();
                 if (document.getElementsByTagName("options-dock")[0] !== undefined) {
@@ -30,6 +32,7 @@
                 container.appendChild(modal);
                 return false;
             },
+            /* Polymer signal receiver that updates the css class with the value passed by the signal */
             dockPosition: function (event, detail, sender) {
                 this.className = "";
                 this.className = detail;

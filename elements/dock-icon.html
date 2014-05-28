@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="window-base.html">
 
+<!-- Element that instances a window-base when gets clicked -->
 <polymer-element name="dock-icon" attributes="name" on-click="{{click}}">
     <template>
         <polymer-signals on-polymer-signal-closed="{{updateIcon}}"></polymer-signals>
@@ -9,14 +10,36 @@
     </template>
     <script>
         Polymer('dock-icon', {
+            /**
+             * This property specifies the name of the app.
+             * This property is used to determine the icon image
+             *
+             * @attribute name
+             * @type string
+             */
             name: "",
+            /**
+             * This property specifies if the app has been opened
+             *
+             * @attribute name
+             * @type boolean
+             */
             open: false,
+            /**
+             * Element "constructor"
+             */
             ready: function () {
                 this.assignIcon();
             },
+            /**
+             * Assign the image icon of the element
+             */
             assignIcon: function () {
                 this.$.box.style.backgroundImage = "url(img/" + this.name + ".png)";
             },
+            /**
+             * Instances a winow-base element when the element is clicked
+             */
             click: function (event, detail, sender) {
                 if (!this.open) {
                     var container = document.getElementsByTagName("window-container")[0];
@@ -26,7 +49,10 @@
                     this.open = true;
                 }
             },
-            updateIcon: function (event, detail, sender) {                
+            /**
+             * When an app is closed this method changes the value of open to "false" so it can be re-open later
+             */
+            updateIcon: function (event, detail, sender) {
                 this.name == detail ? this.open = false : "";
             }
         });

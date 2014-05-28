@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden"> 
+<!-- Main element. This element is responsible for the resize windows, and the draggable functionality apart from being able to close, maximize.. -->
+<polymer-element name="window-base" attributes="name height width left top marginTop" on-mousedown="{{clicked}}" class="hidden">
     <template>
         <polymer-signals on-polymer-signal-inactive="{{updateState}}"></polymer-signals>
         <link rel="stylesheet" href="window-base.css">
@@ -24,23 +25,104 @@
     </template>
     <script>
         Polymer('window-base', {
+            /**
+             * This property has the name of the app that has to be instanced
+             *
+             * @attribute name
+             * @type string
+             */
             name: "finder",
+            /**
+             * This property determines the height of the app
+             *
+             * @attribute height
+             * @type int
+             */
             height: 400,
+            /**
+             * This property determines the width of the app
+             *
+             * @attribute width
+             * @type int
+             */
             width: 500,
+            /**
+             * This property saves old value of the height
+             *
+             * @attribute auxHeight
+             * @type int
+             */
             auxHeight: 0,
+            /**
+             * This property saves old value of the width
+             *
+             * @attribute auxWidth
+             * @type int
+             */
             auxWidth: 0,
+            /**
+             * This property saves the value of the X coordinate from the mouse
+             *
+             * @attribute pointerX
+             * @type int
+             */
             pointerX: 0,
+            /**
+             * This property saves the value of the Y coordinate from the mouse
+             *
+             * @attribute pointerY
+             * @type int
+             */
             pointerY: 0,
+            /**
+             * This property determines the height start point depending of the height of the top bar
+             *
+             * @attribute marginTop
+             * @type int
+             */
             marginTop: 35,
+            /**
+             * This property saves z-index value of the window
+             *
+             * @attribute zNumber
+             * @type int
+             */
             zNumber: 0,
+            /**
+             * This property is used to know if the app is maximized or not
+             *
+             * @attribute maximized
+             * @type boolean
+             */
             maximized: false,
+            /**
+             * This property saves left distance
+             *
+             * @attribute left
+             * @type int
+             */
             left: 300,
+            /**
+             * This property saves top distance
+             *
+             * @attribute top
+             * @type int
+             */
             top: 200,
+            /**
+             * This triggers a function when one of the properties listed is chenaged
+             *
+             * @attribute observe
+             * @type Object
+             */
             observe: {
                 left: 'positionChanged',
                 top: 'positionChanged'
             },
             /* -- Lifecycle ------------------------------------------------- */
+            /**
+             * Element "constructor". Every property is set to the value passed.
+             */
             domReady: function () {
                 this.heightChanged();
                 this.widthChanged();
@@ -49,37 +131,61 @@
                 this.classList.add('active');
 
             },
-            /* -- AUTOMATIC AND DYNAMIC IMPORT BASED ON ATTRIBUTE --------------------------------------------------- */
+            /**
+             * When the element is attached (fully loaded) it imports an element with the name given as a parameter.
+             * Then another method is called where the actual element gets instanced.
+             */
             attached: function () {
                 Polymer.import(['elements/app-window/' + this.name + '-app.html'], function () {
                     this.onComplete();
                 }.bind(this));
             },
             /* -- Changed watchers ------------------------------------------ */
+            /**
+             * Event watcher for the height.
+             */
             heightChanged: function () {
                 this.$.box.style.height = this.height + 'px';
             },
+            /**
+             * Event watcher for the width.
+             */
             widthChanged: function () {
                 this.$.box.style.width = this.width + 'px';
             },
+            /**
+             * Event watcher for the zIndex.
+             */
             zNumberChanged: function (oldValue, newValue) {
                 this.style.zIndex = this.zNumber;
             },
+            /**
+             * Event watcher for the translet property.
+             */
             positionChanged: function () {
                 var s = this.style;
                 var translate = "translate(" + this.left + "px, " + this.top + "px)";
                 s.webkitTransform = s.mozTransform = s.msTransform = s.transform = translate;
             },
             /* -- Methods --------------------------------------------------- */
+            /**
+             * The element previously imported is instanced
+             */
             onComplete: function () {
                 var app = document.createElement(this.name + "-app");
                 this.appendChild(app);
             },
+            /**
+             * When the window is not focused triggers a signal to update its own state. Every instance of window-base is affected
+             */
             inactive: function () {
                 this.fire('polymer-signal', {
                     name: "inactive"
                 });
             },
+            /**
+             * When the window is clicked another signal is triggered. This one is specific to one insance
+             */
             clicked: function () {
                 if (!this.classList.contains("active")) {
                     /* -- SPECIFIC SIGNAL FOR INSTANCED ELEMENT ----*/
@@ -91,6 +197,10 @@
                     this.zNumber = this.zNumber + 4; //needs more timeeeeeeee
                 }
             },
+            /**
+             * This is a polymer signal receiver.
+             * When an app is instanced the window-base updates its own properties to accommodate the necessities of the app it contains
+             */
             options: function (object) {
                 ("width" in object) ? this.width = object.width : "";
                 ("height" in object) ? this.height = object.height : "";
@@ -98,44 +208,74 @@
                 ("left" in object) ? this.left = object.left : "";
                 this.classList.remove("hidden");
             },
+            /**
+             * Update ZIndex
+             */
             updateState: function () {
                 this.zNumber = (this.zNumber - 2) <= 0 ? 0 : (this.zNumber - 2);
                 this.classList.remove('active'); //remove active class from every window-base instance
             },
+            /**
+             * Resize Right
+             */
             trackRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
             },
+            /**
+             * Resize left
+             */
             trackLeft: function (event, detail, sender) {
                 this.width = this.width - (event.clientX - this.left);
                 this.left = event.clientX;
             },
+            /**
+             * Resize Bottom
+             */
             trackBottom: function (event, detail, sender) {
                 this.height = event.clientY - this.top;
             },
+            /**
+             * Resize top
+             */
             trackTop: function (event, detail, sender) {
                 this.height = this.height - (event.clientY - this.top);
                 this.top = event.clientY;
             },
+            /**
+             * Resize BottomRight
+             */
             trackBottomRight: function (event, detail, sender) {
                 this.width = event.clientX - this.left;
                 this.height = event.clientY - this.top;
             },
+            /**
+             * Resize BottomLeft
+             */
             trackBottomLeft: function (event, detail, sender) {
                 this.height = event.clientY - this.top;
                 this.width = this.width - (event.clientX - this.left);
                 this.left = event.clientX;
             },
+            /**
+             * Resize TopRight
+             */
             trackTopRight: function (event, detail, sender) {
                 this.height = this.height - (event.clientY - this.top);
                 this.top = event.clientY;
                 this.width = event.clientX - this.left;
             },
+            /**
+             * Resize TopLeft
+             */
             trackTopLeft: function (event, detail, sender) {
                 this.height = this.height - (event.clientY - this.top);
                 this.top = event.clientY;
                 this.width = this.width - (event.clientX - this.left);
                 this.left = event.clientX;
             },
+            /**
+             * When the drag begins we check if this has been maximized... to recuperate its initial state
+             */
             trackStartDraggable: function (event, detail, sender) {
                 this.$.header.classList.add('dragging');
                 if (this.classList.contains("resized")) {
@@ -150,10 +290,16 @@
                 this.pointerY = event.clientY - this.top;
                 this.pointerX = event.clientX - this.left;
             },
+            /**
+             * During the drag top and left gets updated
+             */
             trackDraggable: function (event, detail, sender) {
                 this.top = event.clientY - this.pointerY;
                 this.left = event.clientX - this.pointerX;
             },
+            /**
+             * When the drag ends we check where the mouse is. Depending where it is the window acts differently
+             */
             trackEndDraggable: function (event, detail, sender) {
                 this.$.header.classList.remove('dragging');
                 var screenWidth = window.innerWidth;
@@ -176,9 +322,15 @@
                     this.maxWindow();
                 }
             },
+            /**
+             * Get acces to the child methos "getOptions".
+             */
             accesChild: function (child) {
                 this.options(child.getOptions());
             },
+            /**
+             * When an app is closed a signal is emitted to notify to the dock-icon that from now on another instance can be made
+             */
             closeWindow: function (event, detail, sender) {
                 this.fire('polymer-signal', {
                     name: "closed",
@@ -186,8 +338,11 @@
                 });
                 this.remove();
             },
+            /**
+             * Maximize window (save original height and width values for later)
+             */
             maximizeWindow: function (event, detail, sender) {
-                if (!this.maximized){
+                if (!this.maximized) {
                     this.auxWidth = this.width;
                     this.auxHeight = this.height;
                     this.top = this.marginTop;
@@ -195,21 +350,27 @@
                     this.width = window.innerWidth;
                     this.height = window.innerHeight;
                     this.maximized = true;
-                }else{
+                } else {
                     this.left = event.clientX;
                     this.resizeWindow();
                     this.maximized = false;
                 }
             },
+            /**
+             * General method to maximize the window.
+             */
             maxWindow: function () {
                 this.top = this.marginTop;
                 this.left = 0;
                 this.width = window.innerWidth;
                 this.height = window.innerHeight;
             },
+            /**
+             * Recuperate the old values after being maximized
+             */
             resizeWindow: function () {
                 this.width = this.auxWidth;
-                this.height = this.auxHeight;            
+                this.height = this.auxHeight;
             }
         });
     </script>
